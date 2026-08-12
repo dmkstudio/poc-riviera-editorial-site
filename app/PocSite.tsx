@@ -6,15 +6,17 @@ import { ArrowDown, ArrowRight, Camera, Check, ChevronDown, Mail, Menu, Phone, S
 import { copy, directionKeys, pillars, type DirectionKey, type Locale } from "./poc-data";
 
 const languages: Locale[] = ["en", "fr", "ru"];
+const contactLinks = [{ name: "Instagram", Icon: Camera }, { name: "Telegram", Icon: Send }, { name: "Email", Icon: Mail }, { name: "Call", Icon: Phone }];
 
 function Brand() { return <a className="brand" href="#home" aria-label="POC, home"><span>POC</span><i /><small>Private Office<br />Consulting</small></a>; }
 function LanguageSwitch({ locale, setLocale }: { locale: Locale; setLocale: (l: Locale) => void }) { return <div className="language" role="group" aria-label="Language">{languages.map(l => <button key={l} className={locale === l ? "active" : ""} aria-pressed={locale === l} onClick={() => setLocale(l)}>{l.toUpperCase()}</button>)}</div>; }
-function Contacts({ unavailable, compact = false }: { unavailable: string; compact?: boolean }) { return <div className={`socials ${compact ? "compact" : ""}`}>{[[Camera,"Instagram"],[Send,"Telegram"],[Mail,"Email"],[Phone,"Call"]].map(([Icon,label]) => { const C = Icon as typeof Camera; return <button type="button" key={label as string} title={unavailable} aria-label={`${label}. ${unavailable}`}><C /><span>{compact ? "" : label as string}</span></button>; })}</div>; }
+function Contacts({ unavailable, compact = false }: { unavailable: string; compact?: boolean }) { return <div className={`socials ${compact ? "compact" : ""}`}>{contactLinks.map(({name,Icon}) => <a key={name} href="#contact" title={unavailable} aria-label={`${name}. ${unavailable}`}><Icon/><span>{compact?"":name}</span></a>)}</div>; }
 
 export default function PocSite() {
   const [locale, setLocaleState] = useState<Locale>("en"); const [menu, setMenu] = useState(false); const [active, setActive] = useState<DirectionKey | null>(null); const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll(); const progress = useSpring(scrollYProgress,{stiffness:120,damping:28}); const t = copy(locale);
   useEffect(()=>{const saved=localStorage.getItem("poc-locale") as Locale|null;const timer=window.setTimeout(()=>{if(saved&&languages.includes(saved))setLocaleState(saved)},0);return()=>window.clearTimeout(timer)},[]);
+  useEffect(()=>{if(!menu)return;const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setMenu(false)};document.body.style.overflow="hidden";window.addEventListener("keydown",close);return()=>{document.body.style.overflow="";window.removeEventListener("keydown",close)}},[menu]);
   function setLocale(l: Locale){ setLocaleState(l); localStorage.setItem("poc-locale",l); document.documentElement.lang=l; }
   function request(key?: DirectionKey){ if(key)setActive(key); document.getElementById("contact")?.scrollIntoView({behavior:reduce?"auto":"smooth"}); }
   return <MotionConfig reducedMotion="user" transition={{duration:.7,ease:[.22,1,.36,1]}}>
@@ -24,7 +26,7 @@ export default function PocSite() {
     <AnimatePresence>{menu&&<motion.nav className="mobile-menu" initial={{opacity:0,y:-20}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-20}}>{[["#approach",t.nav.approach],["#services",t.nav.expertise],["#confidentiality",t.nav.confidentiality],["#contact",t.nav.contact]].map(([href,label])=><a key={href} href={href} onClick={()=>setMenu(false)}>{label}</a>)}<LanguageSwitch locale={locale} setLocale={setLocale}/></motion.nav>}</AnimatePresence>
     <main id="main">
       <section className="hero" id="home">
-        <motion.div className="hero-copy" initial={{opacity:0,y:38}} animate={{opacity:1,y:0}}><h1>{t.hero.title}</h1><span className="sand-line"/><p>{t.hero.body}</p><div className="hero-actions"><button onClick={()=>request()}>{t.hero.primary}<ArrowRight/></button><a href="#services">{t.hero.secondary}<ArrowDown/></a></div></motion.div>
+        <motion.div className="hero-copy" initial={{opacity:0,y:38}} animate={{opacity:1,y:0}}><h1>{t.hero.title}</h1><span className="sand-line"/><p>{t.hero.body}</p><div className="hero-actions"><a className="primary-action" href="#contact">{t.hero.primary}<ArrowRight/></a><a href="#services">{t.hero.secondary}<ArrowDown/></a></div></motion.div>
         <motion.div className="hero-photo" initial={{clipPath:"inset(0 100% 0 0)"}} animate={{clipPath:"inset(0 0% 0 0)"}} transition={{duration:1.5,delay:.15}}><picture><img src="/assets/riviera-editorial-hero.png" alt="French Riviera villa terrace overlooking the Mediterranean" /></picture><span className="navy-block" /></motion.div>
         <span className="architect-line one"/><span className="architect-line two"/>
       </section>
@@ -35,7 +37,7 @@ export default function PocSite() {
         {directionKeys.map((key,index)=>{const p=pillars[locale][key];return <motion.article key={key} layout className={`service ${active===key?"active":""}`}><button className="service-cover" onClick={()=>setActive(active===key?null:key)} aria-expanded={active===key}><span>0{index+1}</span><h3>{p.title}</h3><div className={`panel panel-${index+1}`}/><i><ArrowRight/></i></button><AnimatePresence initial={false}>{active===key&&<motion.div className="service-details" initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}}><p>{p.summary}</p>{p.groups.map(g=><div key={g.title}><h4>{g.title}</h4><ul>{g.items.map(s=><li key={s}>{s}</li>)}</ul></div>)}<button onClick={()=>request(key)}>{t.expertise.discuss}<ArrowRight/></button></motion.div>}</AnimatePresence></motion.article>})}
       </div></section>
 
-      <section className="bespoke" id="confidentiality"><div className="bespoke-dark"><Reveal><p className="eyebrow">{t.custom.label}</p><h2>Bespoke by<br/>nature.</h2><span className="sand-line"/><p>{t.custom.body}</p></Reveal></div><div className="bespoke-light"><motion.div className="conversation-card" whileHover={{y:-8}}><ShieldCheck/><h2>{t.form.label}.</h2><span className="sand-line"/><button onClick={()=>request()} aria-label={t.form.submit}><ArrowRight/></button></motion.div></div></section>
+      <section className="bespoke" id="confidentiality"><div className="bespoke-dark"><Reveal><p className="eyebrow">{t.custom.label}</p><h2>{t.custom.title}</h2><span className="sand-line"/><p>{t.custom.body}</p></Reveal></div><div className="bespoke-light"><motion.div className="conversation-card" whileHover={{y:-8}}><ShieldCheck/><h2>{t.form.label}.</h2><span className="sand-line"/><a href="#contact" aria-label={t.form.submit}><ArrowRight/></a></motion.div></div></section>
 
       <section className="confidential"><Reveal><p className="eyebrow">{t.confidentiality.label}</p><h2>{t.confidentiality.title}</h2><p>{t.confidentiality.body}</p></Reveal><div>{t.confidentiality.points.map((p,i)=><Reveal key={p} className="point"><span>0{i+1}</span><p>{p}</p></Reveal>)}</div></section>
 
