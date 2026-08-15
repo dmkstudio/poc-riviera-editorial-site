@@ -109,16 +109,16 @@ const data = {
     hero: {
       eyebrow: "Private Office Consulting · French Riviera",
       title: "One call. Everything else is our concern.",
-      body: "Consulting, concierge service and coordination through one discreet point of contact — for private and professional matters on the French Riviera and beyond.",
+      body: "Consulting, concierge service and coordination for private and professional matters on the French Riviera and beyond.",
       primary: "Make a private request",
       secondary: "Explore our expertise",
       scroll: "Discover POC",
     },
     positioning: {
       label: "The purpose of our work",
-      title: "One point of contact. A clear route forward.",
+      title: "Complex matters, brought into focus.",
       paragraphs: [
-        "Private Office Consulting brings consulting, concierge service and coordination together in one team — with a single point of contact who stays with your matter through to completion.",
+        "One accountable contact brings the right people, decisions and next steps into one coordinated process.",
         "We step in where speed, sound judgment and complete confidentiality matter. No impersonal service packages.",
         "Every engagement begins with one question — what truly matters here? Only then do we build the shortest, most reliable solution.",
       ],
@@ -141,7 +141,7 @@ const data = {
     custom: {
       label: "Custom request",
       title: "Not everything important fits a category.",
-      body: "Does your request fit none of these directions? That is precisely where we can help. Tell us the outcome you need; we will clarify the essentials and return with the shortest reliable route.",
+      body: "Does your request fit none of these directions? That is precisely where we can help. Tell us the outcome you need; we will identify what matters and propose the right next step.",
       cta: "Describe your request",
     },
     method: {
@@ -156,7 +156,7 @@ const data = {
     },
     confidentiality: {
       label: "Confidentiality",
-      title: "Discretion is part of the work.",
+      title: "Confidentiality is built into the process.",
       body: "Your matter is handled through the smallest practical circle of people. We ask only for what is necessary, coordinate qualified specialists where required and keep communication clear.",
       points: [
         "Need-to-know coordination",
@@ -165,7 +165,7 @@ const data = {
       ],
     },
     form: {
-      label: "Confidential conversation",
+      label: "First step",
       title: "Tell us what needs to be resolved.",
       body: "We will return with a clear first response — confidentially and to the point.",
       name: "Name",
@@ -219,16 +219,16 @@ const data = {
     hero: {
       eyebrow: "Private Office Consulting · Côte d’Azur",
       title: "Un appel. Nous nous occupons de tout le reste.",
-      body: "Conseil, conciergerie et coordination réunis autour d’un interlocuteur unique et discret — pour vos enjeux privés et professionnels sur la Côte d’Azur et au-delà.",
+      body: "Conseil, conciergerie et coordination pour vos enjeux privés et professionnels sur la Côte d’Azur et au-delà.",
       primary: "Faire une demande privée",
       secondary: "Découvrir nos expertises",
       scroll: "Découvrir POC",
     },
     positioning: {
       label: "Le sens de notre engagement",
-      title: "Un interlocuteur unique. Une voie claire.",
+      title: "Les situations complexes, clarifiées.",
       paragraphs: [
-        "Private Office Consulting réunit conseil, conciergerie et coordination au sein d’une même équipe — avec un interlocuteur unique qui accompagne votre demande jusqu’à sa résolution.",
+        "Un interlocuteur responsable réunit les bonnes expertises, les décisions et les prochaines étapes dans une coordination unique.",
         "Nous intervenons là où la rapidité, le discernement et une confidentialité absolue sont essentiels. Aucune formule impersonnelle.",
         "Chaque mission commence par une seule question : qu’est-ce qui compte vraiment ici ? C’est ensuite que nous construisons la solution la plus directe et la plus fiable.",
       ],
@@ -251,7 +251,7 @@ const data = {
     custom: {
       label: "Demande sur mesure",
       title: "L’essentiel ne rentre pas toujours dans une catégorie.",
-      body: "Votre demande ne correspond à aucune de ces expertises ? C’est précisément là que nous pouvons être utiles. Indiquez-nous le résultat recherché ; nous reviendrons avec la voie la plus directe et la plus fiable.",
+      body: "Votre demande ne correspond à aucune de ces expertises ? C’est précisément là que nous pouvons être utiles. Indiquez-nous le résultat recherché ; nous identifierons l’essentiel et proposerons la prochaine étape appropriée.",
       cta: "Décrire votre demande",
     },
     method: {
@@ -266,7 +266,7 @@ const data = {
     },
     confidentiality: {
       label: "Confidentialité",
-      title: "La discrétion fait partie de notre travail.",
+      title: "La confidentialité est intégrée à chaque étape.",
       body: "Votre demande est traitée par le cercle de personnes le plus restreint possible. Nous ne demandons que l’essentiel et coordonnons des spécialistes qualifiés lorsque nécessaire.",
       points: [
         "Coordination selon le besoin d’en connaître",
@@ -275,7 +275,7 @@ const data = {
       ],
     },
     form: {
-      label: "Échange confidentiel",
+      label: "Première étape",
       title: "Dites-nous ce qu’il faut résoudre.",
       body: "Nous reviendrons avec une première réponse claire — en toute confidentialité et sans détour.",
       name: "Nom",
@@ -329,16 +329,16 @@ const data = {
     hero: {
       eyebrow: "Private Office Consulting · Лазурный берег",
       title: "Один звонок. Всё остальное — наша забота.",
-      body: "Консалтинг, консьерж-сервис и координация через одну конфиденциальную точку контакта — для личных и профессиональных задач на Лазурном берегу и за его пределами.",
+      body: "Консалтинг, консьерж-сервис и координация личных и профессиональных задач на Лазурном берегу и за его пределами.",
       primary: "Оставить частный запрос",
       secondary: "Изучить направления",
       scroll: "Узнать о POC",
     },
     positioning: {
       label: "Смысл нашей работы",
-      title: "Одна точка контакта. Понятный путь к решению.",
+      title: "Сложные задачи — в ясном фокусе.",
       paragraphs: [
-        "Private Office Consulting объединяет консалтинг, консьерж-сервис и координацию в единой команде — с одной точкой контакта, которая ведёт ваше дело до конца.",
+        "Один ответственный контакт объединяет нужных специалистов, решения и следующие шаги в едином процессе.",
         "Мы подключаемся там, где нужны скорость, здравый смысл и полная конфиденциальность. Никаких безликих пакетов услуг.",
         "Каждая работа начинается с одного вопроса — что здесь по-настоящему важно, — и только потом мы строим самое короткое и надёжное решение.",
       ],
@@ -361,7 +361,7 @@ const data = {
     custom: {
       label: "Индивидуальный запрос",
       title: "Не всё важное вписывается в категории.",
-      body: "Ваш запрос не вписывается ни в одно направление? Именно здесь мы полезны. Опишите желаемый результат — мы уточним главное и предложим самый короткий и надёжный путь.",
+      body: "Ваш запрос не вписывается ни в одно направление? Именно здесь мы полезны. Опишите желаемый результат — мы выделим главное и предложим следующий разумный шаг.",
       cta: "Описать запрос",
     },
     method: {
@@ -376,7 +376,7 @@ const data = {
     },
     confidentiality: {
       label: "Конфиденциальность",
-      title: "Деликатность — часть нашей работы.",
+      title: "Конфиденциальность встроена в процесс.",
       body: "Вашей задачей занимается минимально необходимый круг людей. Мы запрашиваем только нужную информацию, подключаем профильных специалистов и сохраняем ясность коммуникации.",
       points: [
         "Координация по принципу необходимого знания",
@@ -385,7 +385,7 @@ const data = {
       ],
     },
     form: {
-      label: "Конфиденциальный разговор",
+      label: "Первый шаг",
       title: "Расскажите, что нужно решить.",
       body: "Мы вернёмся с первым чётким ответом — конфиденциально и по существу.",
       name: "Имя",
@@ -473,13 +473,12 @@ export const pillars: Record<Locale, Record<DirectionKey, LocalizedPillar>> = {
       ],
     },
     brand: {
-      title: "Personal Brand",
-      tagline: "Your image. Wherever it matters.",
-      summary: "We coordinate strategy, content and trusted specialists to build a coherent presence across the moments and channels that matter.",
+      title: "Digital & Media Presence",
+      tagline: "Your identity. Clear wherever it appears.",
+      summary: "We create and coordinate the digital materials that make your presence clear, useful and consistent across the channels your clients and partners use.",
       groups: [
-        { title: "Positioning", items: ["Personal-brand audit", "Narrative, biography and key messages", "Visual identity and style", "Multilingual profile adaptation"] },
-        { title: "Content & presence", items: ["Website and profile coordination", "Editorial calendar", "Photography and video teams", "Speech and interview preparation"] },
-        { title: "Visibility", items: ["Media and speaking opportunities", "Partnership research", "Appearance and production logistics", "Reputation workflow coordination"] },
+        { title: "Digital identity", items: ["Website strategy and production", "Digital business cards", "QR contact card", "Multilingual content adaptation"] },
+        { title: "Media & materials", items: ["Presentation and document design", "Photography and video coordination", "Editorial content and updates", "Print-ready business cards and collateral"] },
       ],
     },
   },
@@ -525,13 +524,12 @@ export const pillars: Record<Locale, Record<DirectionKey, LocalizedPillar>> = {
       ],
     },
     brand: {
-      title: "Marque personnelle",
-      tagline: "Votre image. Là où elle compte.",
-      summary: "Nous coordonnons stratégie, contenu et spécialistes de confiance pour construire une présence cohérente à chaque moment et sur chaque canal pertinent.",
+      title: "Présence digitale & média",
+      tagline: "Votre identité. Claire partout où elle apparaît.",
+      summary: "Nous créons et coordonnons les supports digitaux qui rendent votre présence claire, utile et cohérente sur les canaux utilisés par vos clients et partenaires.",
       groups: [
-        { title: "Positionnement", items: ["Audit de marque personnelle", "Récit, biographie et messages", "Identité visuelle et style", "Adaptation multilingue"] },
-        { title: "Contenu & présence", items: ["Site et profils", "Calendrier éditorial", "Photo, vidéo et équipes créatives", "Discours et interviews"] },
-        { title: "Visibilité", items: ["Médias et conférences", "Recherche de partenariats", "Logistique d’apparition", "Suivi de réputation"] },
+        { title: "Identité digitale", items: ["Stratégie et création de site", "Cartes de visite digitales", "Carte de contact QR", "Adaptation multilingue des contenus"] },
+        { title: "Média & supports", items: ["Présentations et documents", "Coordination photo et vidéo", "Contenu éditorial et mises à jour", "Cartes imprimées et supports de marque"] },
       ],
     },
   },
@@ -577,13 +575,12 @@ export const pillars: Record<Locale, Record<DirectionKey, LocalizedPillar>> = {
       ],
     },
     brand: {
-      title: "Личный бренд",
-      tagline: "Ваш образ. Везде, где нужно.",
-      summary: "Координируем стратегию, контент и работу проверенных специалистов, чтобы сформировать цельный образ во всех значимых каналах и ситуациях.",
+      title: "Цифровое и медиа-присутствие",
+      tagline: "Ваша идентичность. Ясно в каждом канале.",
+      summary: "Создаём и координируем цифровые материалы, благодаря которым ваше присутствие выглядит ясно, полезно и последовательно для клиентов и партнёров.",
       groups: [
-        { title: "Позиционирование", items: ["Аудит личного бренда", "История, биография и сообщения", "Визуальный образ и стиль", "Многоязычная адаптация"] },
-        { title: "Контент и присутствие", items: ["Сайт и профили", "Редакционный план", "Фото, видео и команды", "Выступления и интервью"] },
-        { title: "Возможности", items: ["Медиа и выступления", "Партнёрства", "Логистика публичных появлений", "Работа с репутацией"] },
+        { title: "Цифровая идентичность", items: ["Стратегия и создание сайта", "Электронные визитные карточки", "QR-карта контакта", "Многоязычная адаптация контента"] },
+        { title: "Медиа и материалы", items: ["Презентации и документы", "Координация фото и видео", "Редакционный контент и обновления", "Печатные визитки и бренд-материалы"] },
       ],
     },
   },
