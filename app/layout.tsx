@@ -9,6 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{__html:"if ('scrollRestoration' in history) history.scrollRestoration = 'manual';"}} />
+      </head>
       <body>{children}</body>
     </html>
   );
