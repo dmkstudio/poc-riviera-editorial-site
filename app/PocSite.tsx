@@ -60,6 +60,24 @@ export default function PocSite() {
     ru: { brand: "POC, главная", hero: "Терраса виллы на Лазурном берегу с видом на Средиземное море" },
   };
   useEffect(()=>{const saved=localStorage.getItem("poc-locale") as Locale|null;const timer=window.setTimeout(()=>{if(saved&&languages.includes(saved))setLocaleState(saved)},0);return()=>window.clearTimeout(timer)},[]);
+  useEffect(()=>{
+    const storageKey="poc-scroll-y";
+    const navigation=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+    const isReload=navigation?.type==="reload";
+    history.scrollRestoration="manual";
+    if(isReload){
+      const saved=Number(sessionStorage.getItem(storageKey));
+      if(Number.isFinite(saved)) window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>window.scrollTo({top:saved,left:0,behavior:"auto"})));
+    }else if(!window.location.hash){
+      sessionStorage.removeItem(storageKey);
+      window.scrollTo({top:0,left:0,behavior:"auto"});
+    }else sessionStorage.removeItem(storageKey);
+    let frame=0;
+    const save=()=>{window.cancelAnimationFrame(frame);frame=window.requestAnimationFrame(()=>sessionStorage.setItem(storageKey,String(window.scrollY))) };
+    window.addEventListener("scroll",save,{passive:true});
+    window.addEventListener("beforeunload",save);
+    return()=>{window.cancelAnimationFrame(frame);window.removeEventListener("scroll",save);window.removeEventListener("beforeunload",save)};
+  },[]);
   useEffect(()=>{document.documentElement.lang=locale},[locale]);
   useEffect(()=>{if(!menu&&!serviceDialog)return;const close=(event:KeyboardEvent)=>{if(event.key!=="Escape")return;if(serviceDialog)setServiceDialog(null);else setMenu(false)};const previousOverflow=document.body.style.overflow;document.body.style.overflow="hidden";window.addEventListener("keydown",close);return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",close)}},[menu,serviceDialog]);
   function setLocale(l: Locale){ setLocaleState(l); localStorage.setItem("poc-locale",l); document.documentElement.lang=l; }
