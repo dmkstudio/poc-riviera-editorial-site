@@ -64,7 +64,6 @@ export default function PocSite() {
     const storageKey="poc-scroll-y";
     const navigation=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     const isReload=navigation?.type==="reload";
-    history.scrollRestoration="manual";
     if(isReload){
       const saved=Number(sessionStorage.getItem(storageKey));
       if(Number.isFinite(saved)) window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>window.scrollTo({top:saved,left:0,behavior:"auto"})));
