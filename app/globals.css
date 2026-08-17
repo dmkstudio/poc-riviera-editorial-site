@@ -192,6 +192,11 @@ header .brand,header .desktop-nav,header .language,header .menu-button{position:
   .hero-photo,.hero-copy{opacity:1!important;transform:none!important}
 }
 
+/* Keep the document vertically pannable; only the service carousel owns horizontal scrolling. */
+html,body{overscroll-behavior-x:none}
+@supports (overflow:clip){html,body,main{overflow-x:clip}}
+@supports not (overflow:clip){html,body,main{overflow-x:hidden}}
+
 /* A restrained first-paint veil keeps image/font loading from flashing blue or shifting the page. */
 .site-root{opacity:.18;filter:blur(7px);transition:opacity .24s ease-out,filter .34s ease-out;will-change:opacity,filter}
 .site-root.is-ready{opacity:1;filter:blur(0)}
