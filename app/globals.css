@@ -1112,9 +1112,9 @@ header{
   .assurances span{min-height:2.4rem}
   .services-head>p:last-child{min-height:5.4rem}
   .point p{min-height:3rem}
-  .form>label:not(.honeypot):not(.task){min-height:5.65rem}
+  .form>label:not(.honeypot):not(.task){height:6.75rem;min-height:6.75rem}
   .form .task{min-height:9.2rem}
-  .form .privacy{min-height:3.6rem}
+  .form .privacy{height:7.75rem;min-height:7.75rem;align-items:flex-start}
   .form .submit{height:3.45rem;min-height:3.45rem}
   .service-dialog-header{min-height:4.55rem}
   .service-dialog-body h2{min-height:6.15rem}
@@ -1126,4 +1126,5 @@ header{
   .hero-copy{min-height:24rem}
   .hero-actions{grid-template-columns:minmax(0,1fr) 8.25rem;gap:.6rem}
   .hero-actions button,.hero-actions a{letter-spacing:.055em}
+  .form .privacy{height:9rem;min-height:9rem}
 }
