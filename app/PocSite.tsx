@@ -2,13 +2,15 @@
 /* eslint-disable @next/next/no-img-element -- local SVG brand marks are tiny vectors and do not benefit from image optimisation. */
 
 import { FormEvent, type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { ArrowDown, ArrowRight, Check, ChevronDown, Mail, Menu, Phone, ShieldCheck, X } from "lucide-react";
 import { copy, directionKeys, pillars, type DirectionKey, type Locale } from "./poc-data";
 
 const languages: Locale[] = ["en", "fr", "ru"];
-function InstagramMark() { return <img className="contact-brand-mark" src="/assets/icon-instagram.svg" width="24" height="24" alt="" aria-hidden="true" />; }
-function WhatsAppMark() { return <img className="contact-brand-mark" src="/assets/icon-whatsapp.svg" width="24" height="24" alt="" aria-hidden="true" />; }
+type RequestDirection = DirectionKey | "custom";
+function InstagramMark() { return <span className="contact-brand-icon instagram-icon"><img src="/assets/icon-instagram.svg" width="24" height="24" alt="" aria-hidden="true" /></span>; }
+function WhatsAppMark() { return <span className="contact-brand-icon whatsapp-icon"><img src="/assets/icon-whatsapp.svg" width="24" height="24" alt="" aria-hidden="true" /></span>; }
 const contactLinks = [
   { name: "Instagram", Icon: InstagramMark, channel: "instagram" },
   { name: "WhatsApp", Icon: WhatsAppMark, channel: "whatsapp", href: "https://wa.me/33748613632", detail: "+33 7 48 61 36 32" },
@@ -37,7 +39,7 @@ function Contacts({ unavailable, compact = false }: { unavailable: string; compa
   return <div className={`socials ${compact ? "compact" : ""}`}>
     {contactLinks.map(({ name, Icon, channel, href, detail }) => href
       ? <a className="contact-channel" data-channel={channel} key={name} href={href} title={detail} aria-label={`${name}: ${detail}`}><Icon /><span>{compact ? "" : name}</span>{!compact && <small>{detail}</small>}</a>
-      : <div className="social-unavailable contact-channel" data-channel={channel} key={name} aria-label={`${name}. ${unavailable}`}><Icon /><span>{compact ? "" : name}</span>{!compact && <small>{unavailable}</small>}</div>)}
+      : <div className="social-unavailable contact-channel" data-channel={channel} key={name} aria-label={`${name}. ${unavailable}`}><Icon /><span>{compact ? "" : name}</span>{!compact && channel !== "instagram" && <small>{unavailable}</small>}</div>)}
   </div>;
 }
 function HeroTitle({ locale }: { locale: Locale }) {
@@ -50,7 +52,7 @@ function HeroTitle({ locale }: { locale: Locale }) {
 }
 
 export default function PocSite() {
-  const [locale, setLocaleState] = useState<Locale>("en"); const [menu, setMenu] = useState(false); const [active, setActive] = useState<DirectionKey | null>(null); const [serviceDialog, setServiceDialog] = useState<DirectionKey | null>(null); const serviceTrigger = useRef<HTMLButtonElement | null>(null); const reduce = useReducedMotion();
+  const [locale, setLocaleState] = useState<Locale>("en"); const [menu, setMenu] = useState(false); const [active, setActive] = useState<RequestDirection | null>(null); const [serviceDialog, setServiceDialog] = useState<DirectionKey | null>(null); const serviceTrigger = useRef<HTMLButtonElement | null>(null); const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll(); const progress = useSpring(scrollYProgress,{stiffness:120,damping:28}); const t = copy(locale);
   const labels: Record<Locale, { brand: string; hero: string }> = {
     en: { brand: "POC, home", hero: "French Riviera villa terrace overlooking the Mediterranean" },
@@ -63,7 +65,7 @@ export default function PocSite() {
   function setLocale(l: Locale){ setLocaleState(l); localStorage.setItem("poc-locale",l); document.documentElement.lang=l; }
   function openService(key: DirectionKey, trigger: HTMLButtonElement){serviceTrigger.current=trigger;setServiceDialog(key)}
   function closeService(){setServiceDialog(null);window.setTimeout(()=>serviceTrigger.current?.focus(),0)}
-  function request(key?: DirectionKey){ if(key)setActive(key); setServiceDialog(null); document.getElementById("contact")?.scrollIntoView({behavior:reduce?"auto":"smooth"}); }
+  function request(key?: RequestDirection){ if(key)setActive(key); setServiceDialog(null); window.history.replaceState(null,"","#contact"); document.getElementById("contact")?.scrollIntoView({behavior:reduce?"auto":"smooth"}); }
   return <MotionConfig reducedMotion="user" transition={{duration:.7,ease:[.22,1,.36,1]}}>
     <a className="skip" href="#main">{t.nav.skip}</a><motion.div className="progress" style={{scaleY:progress}} />
     <header><Brand label={labels[locale].brand} /><nav className="desktop-nav" aria-label="Primary navigation">{[["#home","POC"],["#approach",t.nav.approach],["#services",t.nav.expertise],["#confidentiality",t.nav.confidentiality],["#contact",t.nav.contact]].map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><LanguageSwitch locale={locale} setLocale={setLocale} label={locale === "fr" ? "Sélecteur de langue" : locale === "ru" ? "Выбор языка" : "Language selector"}/><button className="menu-button" onClick={()=>setMenu(v=>!v)} aria-expanded={menu} aria-controls="mobile-navigation" aria-label={menu?t.nav.menuClose:t.nav.menuOpen}>{menu?<X/>:<Menu/>}</button></header>
@@ -91,13 +93,13 @@ export default function PocSite() {
       </div></section>
       <AnimatePresence>{serviceDialog&&<ServiceDialog locale={locale} direction={serviceDialog} onChange={setServiceDialog} onClose={closeService} onRequest={request}/>}</AnimatePresence>
 
-      <section className="bespoke" id="confidentiality"><div className="bespoke-dark"><Reveal><p className="eyebrow">{t.custom.label}</p><h2>{t.custom.title}</h2><span className="sand-line"/><p>{t.custom.body}</p></Reveal></div><div className="bespoke-light"><motion.div className="conversation-card" whileHover={{y:-8}}><ShieldCheck/><h2>{t.form.label}.</h2><span className="sand-line"/><a href="#contact" aria-label={t.form.submit}><ArrowRight/></a></motion.div></div></section>
+      <section className="bespoke" id="confidentiality"><div className="bespoke-dark"><Reveal><p className="eyebrow">{t.custom.label}</p><h2>{t.custom.title}</h2><span className="sand-line"/><p>{t.custom.body}</p></Reveal></div><div className="bespoke-light"><motion.div className="conversation-card" whileHover={{y:-8}}><ShieldCheck/><h2>{t.form.label}.</h2><span className="sand-line"/><a href="#contact" onClick={event=>{event.preventDefault();request("custom")}} aria-label={t.form.submit}><ArrowRight/></a></motion.div></div></section>
 
-      <section className="confidential"><Reveal><p className="eyebrow">{t.confidentiality.label}</p><h2>{t.confidentiality.title}</h2><p>{t.confidentiality.body}</p></Reveal><div>{t.confidentiality.points.map((p,i)=><Reveal key={p} className="point"><span>0{i+1}</span><p>{p}</p></Reveal>)}</div></section>
+      <section className="confidential"><Reveal className="confidential-copy"><p className="eyebrow">{t.confidentiality.label}</p><h2>{t.confidentiality.title}</h2><p>{t.confidentiality.body}</p></Reveal><div className="confidential-points" aria-label={t.confidentiality.label}>{t.confidentiality.points.map((p,i)=><Reveal key={p} className="point"><span>0{i+1}</span><p>{p}</p></Reveal>)}</div></section>
 
       <section className="contact" id="contact"><div className="contact-copy"><p className="eyebrow">{t.form.label}</p><h2>{t.form.title}</h2><p>{t.form.body}</p><Contacts unavailable={t.form.unavailable}/></div><RequestForm key={`${locale}-${active ?? "none"}`} locale={locale} direction={active}/></section>
     </main>
-    <footer><Brand label={labels[locale].brand}/><div><p>{t.footer.line}</p><p>{t.footer.region}</p></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
+    <footer><Brand label={labels[locale].brand}/><div className="footer-details"><p>{t.footer.line}</p><p>{t.footer.region}</p><nav className="footer-links" aria-label={t.footer.linksLabel}><Link href="/privacy">{t.footer.privacy}</Link><Link href="/legal">{t.footer.legal}</Link></nav></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
   </MotionConfig>;
 }
 
@@ -105,16 +107,39 @@ function Reveal({children,className=""}:{children:React.ReactNode;className?:str
 
 function ServiceDialog({ locale, direction, onChange, onClose, onRequest }: { locale: Locale; direction: DirectionKey; onChange: (key: DirectionKey) => void; onClose: () => void; onRequest: (key: DirectionKey) => void }) {
   const t = copy(locale); const pillar = pillars[locale][direction]; const detailsId = `service-details-${direction}`;
+  const dragging = useRef(false);
+  const activeIndex = directionKeys.indexOf(direction);
+  function chooseAt(clientX: number, element: HTMLDivElement) {
+    const rect = element.getBoundingClientRect();
+    const position = Math.max(0, Math.min(.999, (clientX - rect.left) / rect.width));
+    const next = directionKeys[Math.min(directionKeys.length - 1, Math.floor(position * directionKeys.length))];
+    if (next !== direction) onChange(next);
+  }
+  function beginDrag(event: React.PointerEvent<HTMLDivElement>) {
+    dragging.current = true;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    chooseAt(event.clientX, event.currentTarget);
+  }
+  function moveDrag(event: React.PointerEvent<HTMLDivElement>) {
+    if (dragging.current) chooseAt(event.clientX, event.currentTarget);
+  }
+  function endDrag(event: React.PointerEvent<HTMLDivElement>) {
+    dragging.current = false;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  }
   return <motion.div className="service-dialog-backdrop" role="presentation" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onMouseDown={onClose}>
     <motion.aside id={detailsId} className="service-dialog" role="dialog" aria-modal="true" aria-labelledby="service-dialog-title" initial={{x:"100%"}} animate={{x:0}} exit={{x:"100%"}} transition={{duration:.42,ease:[.22,1,.36,1]}} onMouseDown={event=>event.stopPropagation()}>
       <div className="service-dialog-header"><p className="eyebrow">{t.expertise.services}</p><button className="service-dialog-close" type="button" onClick={onClose} aria-label={t.expertise.close}><X /></button></div>
-      <div className="service-dialog-tabs" role="tablist" aria-label={t.expertise.label}>{directionKeys.map((key,index)=><button key={key} type="button" role="tab" aria-selected={key===direction} aria-controls={detailsId} aria-label={`${index+1}. ${pillars[locale][key].title}`} onClick={()=>onChange(key)}>0{index+1}</button>)}</div>
-      <div className="service-dialog-body"><h2 id="service-dialog-title">{pillar.title}</h2><p className="service-promise">{pillar.summary}</p><div className="service-dialog-groups">{pillar.groups.map(group=><section key={group.title}><h3>{group.title}</h3><ul>{group.items.map(item=><li key={item}>{item}</li>)}</ul></section>)}</div></div>
+      <div className="service-dialog-tabs" role="tablist" aria-label={t.expertise.label} style={{"--service-index": activeIndex} as CSSProperties} onPointerDown={beginDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
+        <span className="service-dialog-tabs-surface" aria-hidden="true"><span className="service-dialog-tab-thumb" /></span>
+        {directionKeys.map((key,index)=><button key={key} type="button" role="tab" aria-selected={key===direction} aria-controls={detailsId} aria-label={`${index+1}. ${pillars[locale][key].title}`} onClick={()=>onChange(key)}>0{index+1}</button>)}
+      </div>
+      <div className="service-dialog-body"><AnimatePresence mode="wait" initial={false}><motion.div key={`${locale}-${direction}`} className="service-dialog-content" initial={{opacity:0,y:12,filter:"blur(4px)"}} animate={{opacity:1,y:0,filter:"blur(0px)"}} exit={{opacity:0,y:-8,filter:"blur(3px)"}} transition={{duration:.28,ease:[.22,1,.36,1]}}><h2 id="service-dialog-title">{pillar.title}</h2><p className="service-promise">{pillar.summary}</p><div className="service-dialog-groups">{pillar.groups.map(group=><section key={group.title}><h3>{group.title}</h3><ul>{group.items.map(item=><li key={item}>{item}</li>)}</ul></section>)}</div></motion.div></AnimatePresence></div>
       <div className="service-dialog-footer"><button type="button" onClick={()=>onRequest(direction)}>{t.expertise.discuss}<ArrowRight /></button></div>
     </motion.aside>
   </motion.div>;
 }
 
-function RequestForm({locale,direction}:{locale:Locale;direction:DirectionKey|null}){const t=copy(locale);const ref=useRef<HTMLFormElement>(null);const [status,setStatus]=useState<"idle"|"sending"|"success"|"error">("idle");const [selected,setSelected]=useState(direction??"");const options=useMemo(()=>directionKeys.map(k=>({value:k,label:pillars[locale][k].title})),[locale]);async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();setStatus("sending");const f=new FormData(e.currentTarget);try{const res=await fetch("/api/request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:f.get("name"),email:f.get("email"),phone:f.get("phone"),direction:f.get("direction"),task:f.get("task"),website:f.get("website"),locale,sourcePath:location.pathname})});if(!res.ok)throw new Error();setStatus("success");ref.current?.reset();setSelected("")}catch{setStatus("error")}}
+function RequestForm({locale,direction}:{locale:Locale;direction:RequestDirection|null}){const t=copy(locale);const ref=useRef<HTMLFormElement>(null);const [status,setStatus]=useState<"idle"|"sending"|"success"|"error">("idle");const [selected,setSelected]=useState(direction??"");const options=useMemo(()=>directionKeys.map(k=>({value:k,label:pillars[locale][k].title})),[locale]);async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();setStatus("sending");const f=new FormData(e.currentTarget);try{const res=await fetch("/api/request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:f.get("name"),email:f.get("email"),phone:f.get("phone"),direction:f.get("direction"),task:f.get("task"),website:f.get("website"),locale,sourcePath:location.pathname})});if(!res.ok)throw new Error();setStatus("success");ref.current?.reset();setSelected("")}catch{setStatus("error")}}
   if(status==="success")return <div className="form success" role="status" aria-live="polite"><Check/><h3>{t.form.successTitle}</h3><p>{t.form.successBody}</p><button onClick={()=>setStatus("idle")}>{t.form.another}</button></div>;
-  return <form ref={ref} className="form" onSubmit={submit}><label className="honeypot" aria-hidden="true"><span>Website</span><input name="website" tabIndex={-1} autoComplete="off"/></label><label><span>{t.form.name}</span><input name="name" required minLength={2} maxLength={100} autoComplete="name"/></label><label><span>{t.form.email}</span><input name="email" type="email" required maxLength={254} autoComplete="email" inputMode="email"/></label><label><span>{t.form.phone}</span><input name="phone" type="tel" maxLength={40} autoComplete="tel" inputMode="tel"/></label><label><span>{t.form.direction}</span><span className="select"><select name="direction" required value={selected} onChange={e=>setSelected(e.target.value)}><option value="" disabled>{t.form.select}</option>{options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}<option value="custom">{t.form.custom}</option><option value="unsure">{t.form.unsure}</option></select><ChevronDown/></span></label><label className="task"><span>{t.form.task}</span><textarea name="task" required minLength={20} maxLength={3000} rows={6}/></label><p className="privacy"><ShieldCheck/>{t.form.privacy}</p><p className="form-status" aria-live="polite">{status==="sending"?t.form.sending:""}</p>{status==="error"&&<p className="error" role="alert">{t.form.sendError}</p>}<button className="submit" disabled={status==="sending"}>{status==="sending"?t.form.sending:t.form.submit}<ArrowRight/></button></form>}
+  return <form ref={ref} className="form" onSubmit={submit} noValidate><label className="honeypot" aria-hidden="true"><span>Website</span><input name="website" tabIndex={-1} autoComplete="off"/></label><label htmlFor="request-name"><span>{t.form.name}</span><input id="request-name" name="name" required minLength={2} maxLength={100} autoComplete="name" /></label><label htmlFor="request-email"><span>{t.form.email}</span><input id="request-email" name="email" type="email" required maxLength={254} autoComplete="email" inputMode="email" /></label><label htmlFor="request-phone"><span>{t.form.phone}</span><input id="request-phone" name="phone" type="tel" maxLength={40} autoComplete="tel" inputMode="tel" /></label><label htmlFor="request-direction"><span>{t.form.direction}</span><span className="select"><select id="request-direction" name="direction" required value={selected} onChange={e=>setSelected(e.target.value)}><option value="" disabled>{t.form.select}</option>{options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}<option value="custom">{t.form.custom}</option></select><ChevronDown aria-hidden="true" /></span></label><label className="task" htmlFor="request-task"><span>{t.form.task}</span><textarea id="request-task" name="task" required minLength={20} maxLength={3000} rows={6} /></label><p className="privacy"><ShieldCheck aria-hidden="true" />{t.form.privacy} <a href="/privacy">{t.footer.privacy}</a></p><p className="form-status" aria-live="polite">{status==="sending"?t.form.sending:""}</p>{status==="error"&&<p className="error" role="alert">{t.form.sendError}</p>}<button className="submit" disabled={status==="sending"}>{status==="sending"?t.form.sending:t.form.submit}<ArrowRight aria-hidden="true" /></button></form>}
