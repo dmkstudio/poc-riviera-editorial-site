@@ -121,7 +121,6 @@ export default function PocSite() {
       <section className="services" id="services"><div className="services-head"><p className="eyebrow">{t.expertise.label}</p><h2>{t.expertise.title}</h2><p>{t.expertise.body}</p></div><div className="service-grid">
         {directionKeys.map((key,index)=>{const p=pillars[locale][key];const detailsId=`service-details-${key}`;return <motion.article key={key} layout className="service"><button className="service-cover" onClick={(event)=>openService(key,event.currentTarget)} aria-haspopup="dialog" aria-controls={detailsId}><span>0{index+1}</span><h3>{p.title}</h3><div className={`panel panel-${index+1}`}/><i><ArrowRight/></i></button></motion.article>})}
       </div></section>
-      <AnimatePresence>{serviceDialog&&<ServiceDialog locale={locale} direction={serviceDialog} onChange={setServiceDialog} onClose={closeService} onRequest={request}/>}</AnimatePresence>
 
       <section className="bespoke" id="confidentiality"><div className="bespoke-dark"><Reveal><p className="eyebrow">{t.custom.label}</p><h2>{t.custom.title}</h2><span className="sand-line"/><p>{t.custom.body}</p></Reveal></div><div className="bespoke-light"><motion.div className="conversation-card" whileHover={{y:-8}}><ShieldCheck/><h2>{t.form.label}.</h2><span className="sand-line"/><a href="#contact" onClick={event=>{event.preventDefault();request("custom")}} aria-label={t.form.submit}><ArrowRight/></a></motion.div></div></section>
 
@@ -130,7 +129,7 @@ export default function PocSite() {
       <section className="contact" id="contact"><div className="contact-copy"><p className="eyebrow">{t.form.label}</p><h2>{t.form.title}</h2><p>{t.form.body}</p><Contacts unavailable={t.form.unavailable}/></div><RequestForm key={`${locale}-${active ?? "none"}`} locale={locale} direction={active}/></section>
     </main>
     <footer><Brand label={labels[locale].brand}/><div className="footer-details"><p>{t.footer.line}</p><p>{t.footer.region}</p><nav className="footer-links" aria-label={t.footer.linksLabel}><Link href="/privacy">{t.footer.privacy}</Link><Link href="/legal">{t.footer.legal}</Link></nav></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
-  </div></MotionConfig>;
+  </div><AnimatePresence>{serviceDialog&&<ServiceDialog locale={locale} direction={serviceDialog} onChange={setServiceDialog} onClose={closeService} onRequest={request}/>}</AnimatePresence></MotionConfig>;
 }
 
 function Reveal({children,className=""}:{children:React.ReactNode;className?:string}){return <motion.div className={className} initial={false} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.2}}>{children}</motion.div>}
