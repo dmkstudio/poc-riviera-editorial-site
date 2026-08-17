@@ -1101,9 +1101,9 @@ header{
 @media(max-width:760px){
   .mobile-menu>a{display:flex;align-items:center;min-height:3.2rem;padding:.5rem .25rem;line-height:1.08}
   .mobile-menu .language{flex:0 0 auto}
-  .hero-copy{min-height:clamp(22rem,49svh,26rem);display:flex;flex-direction:column;justify-content:flex-end}
+  .hero-copy{height:clamp(22rem,49svh,26rem);min-height:0;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
   .hero-copy h1{min-height:8.95rem;display:block}
-  .hero-copy>p{min-height:3.2rem}
+  .hero-copy>p{height:4rem;min-height:4rem;overflow:hidden}
   .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(8.75rem,10rem);align-items:stretch;gap:.75rem;height:3.25rem}
   .hero-actions .primary-action,.hero-actions a:not(.primary-action){width:100%;height:3.25rem;min-height:3.25rem;justify-content:space-between;margin:0}
   .hero-actions .primary-action{padding:.72rem .82rem}
@@ -1123,7 +1123,7 @@ header{
   .service-dialog-footer button{height:3.35rem;min-height:3.35rem}
 }
 @media(max-width:360px){
-  .hero-copy{min-height:24rem}
+  .hero-copy{height:24rem}
   .hero-actions{grid-template-columns:minmax(0,1fr) 8.25rem;gap:.6rem}
   .hero-actions button,.hero-actions a{letter-spacing:.055em}
   .form .privacy{height:9rem;min-height:9rem}
