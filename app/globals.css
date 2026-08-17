@@ -700,8 +700,9 @@ header{
 .desktop-nav a{font-size:.74rem;opacity:.9}
 
 /* Services keep their editorial rhythm; details live in a dedicated inspector. */
-.service-dialog-backdrop{position:fixed;z-index:120;inset:0;display:flex;justify-content:flex-end;background:rgba(8,29,51,.2);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
-.service-dialog{width:min(41rem,100vw);height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;background:rgba(250,248,243,.96);border-left:1px solid rgba(9,40,79,.2);box-shadow:-20px 0 55px rgba(7,28,48,.18);overflow:hidden}
+.service-dialog-backdrop{position:fixed;z-index:120;inset:0;display:flex;justify-content:flex-end;background:rgba(8,29,51,.14);isolation:isolate}
+.service-dialog-backdrop::before{content:"";position:absolute;inset:0;background:rgba(8,29,51,.1);backdrop-filter:blur(7px) saturate(.9);-webkit-backdrop-filter:blur(7px) saturate(.9);pointer-events:none}
+.service-dialog{position:relative;z-index:1;width:min(41rem,100vw);height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;background:rgba(250,248,243,.96);border-left:1px solid rgba(9,40,79,.2);box-shadow:-20px 0 55px rgba(7,28,48,.18);overflow:hidden}
 .service-dialog-header{display:flex;align-items:center;justify-content:space-between;padding:2rem 2.4rem 1.05rem;border-bottom:1px solid var(--line)}
 .service-dialog-header .eyebrow{margin:0}
 .service-dialog-close{width:2.75rem;height:2.75rem;display:grid;place-content:center;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.44);transition:background .22s ease,transform .22s ease}
