@@ -64,18 +64,26 @@ export default function PocSite() {
     const storageKey="poc-scroll-y";
     const navigation=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     const isReload=navigation?.type==="reload";
+    const scrollToHash=(behavior:ScrollBehavior="auto")=>{
+      const id=decodeURIComponent(window.location.hash.slice(1));
+      if(!id)return;
+      window.setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior,block:"start"}),0);
+    };
     if(isReload){
       const saved=Number(sessionStorage.getItem(storageKey));
       if(Number.isFinite(saved)) window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>window.scrollTo({top:saved,left:0,behavior:"auto"})));
+      else scrollToHash();
     }else if(!window.location.hash){
       sessionStorage.removeItem(storageKey);
       window.scrollTo({top:0,left:0,behavior:"auto"});
-    }else sessionStorage.removeItem(storageKey);
+    }else{sessionStorage.removeItem(storageKey);scrollToHash()}
     let frame=0;
     const save=()=>{window.cancelAnimationFrame(frame);frame=window.requestAnimationFrame(()=>sessionStorage.setItem(storageKey,String(window.scrollY))) };
+    const onHashChange=()=>scrollToHash("smooth");
     window.addEventListener("scroll",save,{passive:true});
     window.addEventListener("beforeunload",save);
-    return()=>{window.cancelAnimationFrame(frame);window.removeEventListener("scroll",save);window.removeEventListener("beforeunload",save)};
+    window.addEventListener("hashchange",onHashChange);
+    return()=>{window.cancelAnimationFrame(frame);window.removeEventListener("scroll",save);window.removeEventListener("beforeunload",save);window.removeEventListener("hashchange",onHashChange)};
   },[]);
   useEffect(()=>{document.documentElement.lang=locale},[locale]);
   useEffect(()=>{if(!menu&&!serviceDialog)return;const close=(event:KeyboardEvent)=>{if(event.key!=="Escape")return;if(serviceDialog)setServiceDialog(null);else setMenu(false)};const previousOverflow=document.body.style.overflow;document.body.style.overflow="hidden";window.addEventListener("keydown",close);return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",close)}},[menu,serviceDialog]);
