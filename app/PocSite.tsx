@@ -52,7 +52,7 @@ function HeroTitle({ locale }: { locale: Locale }) {
 }
 
 export default function PocSite() {
-  const [locale, setLocaleState] = useState<Locale>("en"); const [menu, setMenu] = useState(false); const [active, setActive] = useState<RequestDirection | null>(null); const [serviceDialog, setServiceDialog] = useState<DirectionKey | null>(null); const serviceTrigger = useRef<HTMLButtonElement | null>(null); const reduce = useReducedMotion();
+  const [locale, setLocaleState] = useState<Locale>("en"); const [menu, setMenu] = useState(false); const [active, setActive] = useState<RequestDirection | null>(null); const [serviceDialog, setServiceDialog] = useState<DirectionKey | null>(null); const [pageReady, setPageReady] = useState(false); const serviceTrigger = useRef<HTMLButtonElement | null>(null); const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll(); const progress = useSpring(scrollYProgress,{stiffness:120,damping:28}); const t = copy(locale);
   const labels: Record<Locale, { brand: string; hero: string }> = {
     en: { brand: "POC, home", hero: "French Riviera villa terrace overlooking the Mediterranean" },
@@ -85,13 +85,19 @@ export default function PocSite() {
     window.addEventListener("hashchange",onHashChange);
     return()=>{window.cancelAnimationFrame(frame);window.removeEventListener("scroll",save);window.removeEventListener("beforeunload",save);window.removeEventListener("hashchange",onHashChange)};
   },[]);
+  useEffect(()=>{
+    const reveal=()=>window.requestAnimationFrame(()=>setPageReady(true));
+    if(document.readyState==="complete") reveal();
+    else window.addEventListener("load",reveal,{once:true});
+    return()=>window.removeEventListener("load",reveal);
+  },[]);
   useEffect(()=>{document.documentElement.lang=locale},[locale]);
   useEffect(()=>{if(!menu&&!serviceDialog)return;const close=(event:KeyboardEvent)=>{if(event.key!=="Escape")return;if(serviceDialog)setServiceDialog(null);else setMenu(false)};const previousOverflow=document.body.style.overflow;document.body.style.overflow="hidden";window.addEventListener("keydown",close);return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",close)}},[menu,serviceDialog]);
   function setLocale(l: Locale){ setLocaleState(l); localStorage.setItem("poc-locale",l); document.documentElement.lang=l; }
   function openService(key: DirectionKey, trigger: HTMLButtonElement){serviceTrigger.current=trigger;setServiceDialog(key)}
   function closeService(){setServiceDialog(null);window.setTimeout(()=>serviceTrigger.current?.focus(),0)}
   function request(key?: RequestDirection){ if(key)setActive(key); setServiceDialog(null); window.history.replaceState(null,"","#contact"); document.getElementById("contact")?.scrollIntoView({behavior:reduce?"auto":"smooth"}); }
-  return <MotionConfig reducedMotion="user" transition={{duration:.7,ease:[.22,1,.36,1]}}>
+  return <MotionConfig reducedMotion="user" transition={{duration:.7,ease:[.22,1,.36,1]}}><div className={`site-root${pageReady ? " is-ready" : ""}`}>
     <a className="skip" href="#main">{t.nav.skip}</a><motion.div className="progress" style={{scaleY:progress}} />
     <header><Brand label={labels[locale].brand} /><nav className="desktop-nav" aria-label="Primary navigation">{[["#home","POC"],["#approach",t.nav.approach],["#services",t.nav.expertise],["#confidentiality",t.nav.confidentiality],["#contact",t.nav.contact]].map(([href,label])=><a key={href} href={href}>{label}</a>)}</nav><LanguageSwitch locale={locale} setLocale={setLocale} label={locale === "fr" ? "Sélecteur de langue" : locale === "ru" ? "Выбор языка" : "Language selector"}/><button className="menu-button" onClick={()=>setMenu(v=>!v)} aria-expanded={menu} aria-controls="mobile-navigation" aria-label={menu?t.nav.menuClose:t.nav.menuOpen}>{menu?<X/>:<Menu/>}</button></header>
     <AnimatePresence>{menu&&<motion.nav id="mobile-navigation" className="mobile-menu" initial={{opacity:0,y:-12}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-10}} transition={{duration:.28}}>{[["#home","POC"],["#approach",t.nav.approach],["#services",t.nav.expertise],["#confidentiality",t.nav.confidentiality],["#contact",t.nav.contact]].map(([href,label])=><a key={href} href={href} onClick={()=>setMenu(false)}>{label}</a>)}<LanguageSwitch locale={locale} setLocale={setLocale} label={locale === "fr" ? "Sélecteur de langue" : locale === "ru" ? "Выбор языка" : "Language selector"}/></motion.nav>}</AnimatePresence>
@@ -125,10 +131,10 @@ export default function PocSite() {
       <section className="contact" id="contact"><div className="contact-copy"><p className="eyebrow">{t.form.label}</p><h2>{t.form.title}</h2><p>{t.form.body}</p><Contacts unavailable={t.form.unavailable}/></div><RequestForm key={`${locale}-${active ?? "none"}`} locale={locale} direction={active}/></section>
     </main>
     <footer><Brand label={labels[locale].brand}/><div className="footer-details"><p>{t.footer.line}</p><p>{t.footer.region}</p><nav className="footer-links" aria-label={t.footer.linksLabel}><Link href="/privacy">{t.footer.privacy}</Link><Link href="/legal">{t.footer.legal}</Link></nav></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
-  </MotionConfig>;
+  </div></MotionConfig>;
 }
 
-function Reveal({children,className=""}:{children:React.ReactNode;className?:string}){return <motion.div className={className} initial={{opacity:0,y:32}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.2}}>{children}</motion.div>}
+function Reveal({children,className=""}:{children:React.ReactNode;className?:string}){return <motion.div className={className} initial={false} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.2}}>{children}</motion.div>}
 
 function ServiceDialog({ locale, direction, onChange, onClose, onRequest }: { locale: Locale; direction: DirectionKey; onChange: (key: DirectionKey) => void; onClose: () => void; onRequest: (key: DirectionKey) => void }) {
   const t = copy(locale); const pillar = pillars[locale][direction]; const detailsId = `service-details-${direction}`;

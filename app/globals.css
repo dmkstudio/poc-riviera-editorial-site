@@ -187,9 +187,14 @@ header .brand,header .desktop-nav,header .language,header .menu-button{position:
 @media(max-width:760px){.hero{padding-top:6rem}.hero-copy{padding-top:1rem}.hero-copy h1{margin-top:0}}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .site-root{opacity:1!important;filter:none!important;transition:none!important}
   .hero-photo,.hero-copy,.mobile-menu,.service-details,.conversation-card{animation:none!important;transition:none!important}
   .hero-photo,.hero-copy{opacity:1!important;transform:none!important}
 }
+
+/* A restrained first-paint veil keeps image/font loading from flashing blue or shifting the page. */
+.site-root{opacity:.18;filter:blur(7px);transition:opacity .24s ease-out,filter .34s ease-out;will-change:opacity,filter}
+.site-root.is-ready{opacity:1;filter:blur(0)}
 
 /* The opening is an editorial spread: content ends with the image, rather than with an empty viewport. */
 @media(min-width:761px){
