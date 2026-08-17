@@ -1095,3 +1095,35 @@ header{
     background:linear-gradient(90deg,transparent 0%,rgba(185,154,114,.7) 18%,rgba(185,154,114,.7) 82%,transparent 100%);
   }
 }
+
+/* Mobile localization stability: translations may wrap, but their component
+   slots stay intentional so changing language never reflows the composition. */
+@media(max-width:760px){
+  .mobile-menu>a{display:flex;align-items:center;min-height:3.2rem;padding:.5rem .25rem;line-height:1.08}
+  .mobile-menu .language{flex:0 0 auto}
+  .hero-copy{min-height:clamp(22rem,49svh,26rem);display:flex;flex-direction:column;justify-content:flex-end}
+  .hero-copy h1{min-height:8.95rem;display:block}
+  .hero-copy>p{min-height:3.2rem}
+  .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(8.75rem,10rem);align-items:stretch;gap:.75rem;height:3.25rem}
+  .hero-actions .primary-action,.hero-actions a:not(.primary-action){width:100%;height:3.25rem;min-height:3.25rem;justify-content:space-between;margin:0}
+  .hero-actions .primary-action{padding:.72rem .82rem}
+  .hero-actions a:not(.primary-action){padding:.55rem .1rem;text-align:left;line-height:1.15}
+  .approach-item p{min-height:4.8rem}
+  .assurances span{min-height:2.4rem}
+  .services-head>p:last-child{min-height:5.4rem}
+  .point p{min-height:3rem}
+  .form>label:not(.honeypot):not(.task){min-height:5.65rem}
+  .form .task{min-height:9.2rem}
+  .form .privacy{min-height:3.6rem}
+  .form .submit{height:3.45rem;min-height:3.45rem}
+  .service-dialog-header{min-height:4.55rem}
+  .service-dialog-body h2{min-height:6.15rem}
+  .service-dialog-body .service-promise{min-height:7.15rem}
+  .service-dialog-groups{margin-top:0}
+  .service-dialog-footer button{height:3.35rem;min-height:3.35rem}
+}
+@media(max-width:360px){
+  .hero-copy{min-height:24rem}
+  .hero-actions{grid-template-columns:minmax(0,1fr) 8.25rem;gap:.6rem}
+  .hero-actions button,.hero-actions a{letter-spacing:.055em}
+}
