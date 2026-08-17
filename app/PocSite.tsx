@@ -156,7 +156,7 @@ function ServiceDialog({ locale, direction, onChange, onClose, onRequest }: { lo
     dragging.current = false;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
-  return <motion.div className="service-dialog-backdrop" role="presentation" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onMouseDown={onClose}>
+  return <motion.div className="service-dialog-backdrop" role="presentation" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.38,ease:[.22,1,.36,1]}} onMouseDown={onClose}>
     <motion.aside id={detailsId} className="service-dialog" role="dialog" aria-modal="true" aria-labelledby="service-dialog-title" initial={{x:"100%"}} animate={{x:0}} exit={{x:"100%"}} transition={{duration:.42,ease:[.22,1,.36,1]}} onMouseDown={event=>event.stopPropagation()}>
       <div className="service-dialog-header"><p className="eyebrow">{t.expertise.services}</p><button className="service-dialog-close" type="button" onClick={onClose} aria-label={t.expertise.close}><X /></button></div>
       <div className="service-dialog-tabs" role="tablist" aria-label={t.expertise.label} style={{"--service-index": activeIndex} as CSSProperties} onPointerDown={beginDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
