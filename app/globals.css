@@ -1141,3 +1141,7 @@ header{
   .hero-copy-main .sand-line{margin:.15rem 0}
   .hero-copy-main>p{height:4rem;min-height:4rem;margin:0;overflow:hidden;font-size:.86rem;line-height:1.48;max-width:31rem}
 }
+
+@media(max-width:760px){
+  header .brand small{font-size:.72rem;line-height:1.05;max-width:9rem}
+}
