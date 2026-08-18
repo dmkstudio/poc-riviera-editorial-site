@@ -1227,3 +1227,18 @@ header{
   .socials .contact-channel-copy>span{font-size:.8rem}
   .socials .contact-channel-copy>small{font-size:.66rem}
 }
+
+/* Final contact alignment: the copy block sits on the icon's optical centre,
+   with the label and its real detail sharing one deliberate baseline. */
+.socials .contact-channel-copy{
+  align-self:center;
+  flex-wrap:nowrap;
+  white-space:nowrap;
+  line-height:1.2;
+}
+.socials .contact-channel-copy>span{font-size:1.05rem}
+.socials .contact-channel-copy>small{font-size:.82rem;line-height:1.2}
+@media(max-width:760px){
+  .socials .contact-channel-copy>span{font-size:.9rem}
+  .socials .contact-channel-copy>small{font-size:.72rem}
+}
