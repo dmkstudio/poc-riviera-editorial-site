@@ -1059,6 +1059,37 @@ header{
   .socials .contact-brand-icon img{width:1rem;height:1rem}
 }
 
+/* Mobile contact tiles: keep the real contact detail legible and align every
+   channel around the same two-line information rhythm. */
+@media(max-width:760px){
+  .socials .contact-channel{
+    grid-template-columns:2.35rem minmax(0,1fr);
+    align-items:center;
+    min-height:4.55rem;
+    height:auto;
+    padding:.72rem .8rem;
+  }
+  .socials .contact-channel :is(svg,.contact-brand-icon){
+    box-sizing:border-box;
+    width:2rem;
+    height:2rem;
+    padding:.36rem;
+    align-self:center;
+  }
+  .socials .contact-channel span{
+    align-self:end;
+    font-size:.82rem;
+    line-height:1.2;
+  }
+  .socials .contact-channel small{
+    align-self:start;
+    margin-top:.12rem;
+    font-size:.68rem;
+    line-height:1.3;
+    overflow-wrap:anywhere;
+  }
+}
+
 /* Editorial bridge: give the space above the contact grid a quiet brand rhythm. */
 .contact-copy{position:relative;overflow:hidden}
 .contact-copy::before{
