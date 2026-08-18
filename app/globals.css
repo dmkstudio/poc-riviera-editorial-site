@@ -1237,8 +1237,13 @@ header{
   line-height:1.2;
 }
 .socials .contact-channel-copy>span{font-size:1.05rem}
-.socials .contact-channel-copy>small{font-size:.82rem;line-height:1.2}
+.socials .contact-channel-copy>small{
+  font-size:.95rem;
+  font-weight:400;
+  line-height:1.2;
+  color:rgba(9,40,79,.78);
+}
 @media(max-width:760px){
   .socials .contact-channel-copy>span{font-size:.9rem}
-  .socials .contact-channel-copy>small{font-size:.72rem}
+  .socials .contact-channel-copy>small{font-size:.82rem}
 }
