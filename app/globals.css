@@ -198,8 +198,8 @@ html,body{overscroll-behavior-x:none}
 @supports not (overflow:clip){html,body,main{overflow-x:hidden}}
 
 /* A restrained first-paint veil keeps image/font loading from flashing blue or shifting the page. */
-.site-root{opacity:.18;filter:blur(7px);transition:opacity .24s ease-out,filter .34s ease-out;will-change:opacity,filter}
-.site-root.is-ready{opacity:1;filter:blur(0)}
+.site-root{opacity:1;filter:none;transition:none;will-change:auto}
+.site-root.is-ready{opacity:1;filter:none}
 
 /* The opening is an editorial spread: content ends with the image, rather than with an empty viewport. */
 @media(min-width:761px){
@@ -707,7 +707,7 @@ header{
 .desktop-nav a{font-size:.74rem;opacity:.9}
 
 /* Services keep their editorial rhythm; details live in a dedicated inspector. */
-.service-dialog-backdrop{position:fixed;z-index:120;inset:0;display:flex;justify-content:flex-end;background:rgba(8,29,51,.2);isolation:isolate;will-change:opacity}
+.service-dialog-backdrop{position:fixed;z-index:120;inset:0;display:flex;justify-content:flex-end;background:rgba(244,240,233,.2);isolation:isolate;will-change:opacity}
 .service-dialog{position:relative;z-index:1;width:min(41rem,100vw);height:100dvh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;background:rgba(250,248,243,.96);border-left:1px solid rgba(9,40,79,.2);box-shadow:-20px 0 55px rgba(7,28,48,.18);overflow:hidden;contain:layout paint;will-change:transform}
 .service-dialog-header{display:flex;align-items:center;justify-content:space-between;padding:2rem 2.4rem 1.05rem;border-bottom:1px solid var(--line)}
 .service-dialog-header .eyebrow{margin:0}
