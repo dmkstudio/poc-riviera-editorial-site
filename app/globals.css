@@ -1128,3 +1128,16 @@ header{
   .hero-actions button,.hero-actions a{letter-spacing:.055em}
   .form .privacy{height:9rem;min-height:9rem}
 }
+
+/* Keep the hero message as one explicit text group on mobile. */
+.hero-copy-main{display:contents}
+.hero-copy-main>p{font-size:1.05rem;line-height:1.75;max-width:34rem}
+@media(min-width:761px){
+  .hero-copy-main>p{margin:0;max-width:42rem;line-height:1.62;min-height:3.4rem}
+}
+@media(max-width:760px){
+  .hero-copy-main{display:flex;flex-direction:column;gap:0}
+  .hero-copy-main h1{margin:0;min-height:8.95rem}
+  .hero-copy-main .sand-line{margin:.15rem 0}
+  .hero-copy-main>p{height:4rem;min-height:4rem;margin:0;overflow:hidden;font-size:.86rem;line-height:1.48;max-width:31rem}
+}
