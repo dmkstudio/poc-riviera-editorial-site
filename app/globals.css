@@ -376,7 +376,7 @@ html,body{overscroll-behavior-x:none}
     -webkit-backdrop-filter:blur(16px) saturate(110%);
   }
   .hero-copy h1{max-width:20rem;margin:0;font-size:clamp(2.8rem,10.4vw,3.7rem);line-height:.94}
-  .hero-copy .sand-line{margin:.3rem 0}
+  .hero-copy .sand-line{margin:.15rem 0}
   .hero-copy>p{font-size:.86rem;line-height:1.48;margin:0;max-width:31rem}
   .hero-actions{flex-direction:row;align-items:center;gap:1.15rem;margin-top:1.35rem}
   .hero-actions button,.hero-actions a{font-size:.62rem;letter-spacing:.08em}
