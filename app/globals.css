@@ -1191,8 +1191,9 @@ header{
 }
 
 /* Contact channels: one calm horizontal line — mark, channel name, detail. */
+.contact-copy .socials{grid-template-columns:1fr;width:min(100%,30rem)}
 .socials .contact-channel{
-  grid-template-columns:2.35rem auto minmax(0,1fr);
+  grid-template-columns:2.35rem minmax(0,1fr);
   column-gap:.7rem;
   align-items:center;
 }
@@ -1200,20 +1201,29 @@ header{
   grid-row:auto;
   align-self:center;
 }
-.socials .contact-channel span,
-.socials .contact-channel small{
+.socials .contact-channel-copy{
   grid-column:auto;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.2rem .8rem;
+  min-width:0;
+}
+.socials .contact-channel-copy>span,
+.socials .contact-channel-copy>small{
   align-self:center;
   min-width:0;
   margin:0;
 }
-.socials .contact-channel span{white-space:nowrap}
-.socials .contact-channel small{overflow-wrap:anywhere}
+.socials .contact-channel-copy>span{white-space:nowrap}
+.socials .contact-channel-copy>small{overflow-wrap:anywhere}
 @media(max-width:760px){
+  .contact-copy .socials{grid-template-columns:1fr;width:100%}
   .socials .contact-channel{
-    grid-template-columns:2.1rem auto minmax(0,1fr);
+    grid-template-columns:2.1rem minmax(0,1fr);
     column-gap:.62rem;
   }
-  .socials .contact-channel span{font-size:.8rem}
-  .socials .contact-channel small{font-size:.66rem}
+  .socials .contact-channel-copy{gap:.15rem .65rem}
+  .socials .contact-channel-copy>span{font-size:.8rem}
+  .socials .contact-channel-copy>small{font-size:.66rem}
 }

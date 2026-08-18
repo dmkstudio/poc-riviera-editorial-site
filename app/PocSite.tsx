@@ -38,8 +38,8 @@ function LanguageSwitch({ locale, setLocale, label }: { locale: Locale; setLocal
 function Contacts({ unavailable, compact = false }: { unavailable: string; compact?: boolean }) {
   return <div className={`socials ${compact ? "compact" : ""}`}>
     {contactLinks.map(({ name, Icon, channel, href, detail }) => href
-      ? <a className="contact-channel" data-channel={channel} key={name} href={href} title={detail} aria-label={`${name}: ${detail}`}><Icon /><span>{compact ? "" : name}</span>{!compact && <small>{detail}</small>}</a>
-      : <div className="social-unavailable contact-channel" data-channel={channel} key={name} aria-label={`${name}. ${unavailable}`}><Icon /><span>{compact ? "" : name}</span>{!compact && channel !== "instagram" && <small>{unavailable}</small>}</div>)}
+      ? <a className="contact-channel" data-channel={channel} key={name} href={href} title={detail} aria-label={`${name}: ${detail}`}><Icon /><span className="contact-channel-copy"><span>{compact ? "" : name}</span>{!compact && <small>{detail}</small>}</span></a>
+      : <div className="social-unavailable contact-channel" data-channel={channel} key={name} aria-label={`${name}. ${unavailable}`}><Icon /><span className="contact-channel-copy"><span>{compact ? "" : name}</span>{!compact && channel !== "instagram" && <small>{unavailable}</small>}</span></div>)}
   </div>;
 }
 function HeroTitle({ locale }: { locale: Locale }) {
