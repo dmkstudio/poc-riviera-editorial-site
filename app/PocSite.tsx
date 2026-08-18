@@ -13,7 +13,7 @@ function InstagramMark() { return <span className="contact-brand-icon instagram-
 function WhatsAppMark() { return <span className="contact-brand-icon whatsapp-icon"><img src="/assets/icon-whatsapp.svg" width="24" height="24" alt="" aria-hidden="true" /></span>; }
 const contactLinks = [
   { name: "Instagram", Icon: InstagramMark, channel: "instagram" },
-  { name: "WhatsApp", Icon: WhatsAppMark, channel: "whatsapp", href: "https://wa.me/33748613632", detail: "+33 7 48 61 36 32" },
+  { name: "WhatsApp", Icon: WhatsAppMark, channel: "whatsapp", href: "https://wa.me/33604116140", detail: "+33 6 04 11 61 40" },
   { name: "Email", Icon: Mail, channel: "email", href: "mailto:conact.poc@gmail.com", detail: "conact.poc@gmail.com" },
   { name: "Call", Icon: Phone, channel: "call", href: "tel:+33748613632", detail: "+33 7 48 61 36 32" },
 ];
