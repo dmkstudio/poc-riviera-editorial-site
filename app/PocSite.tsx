@@ -91,7 +91,7 @@ export default function PocSite() {
     return()=>{window.cancelAnimationFrame(frame);window.removeEventListener("load",restore);window.removeEventListener("scroll",save);window.removeEventListener("beforeunload",save);window.removeEventListener("hashchange",onHashChange)};
   },[]);
   useEffect(()=>{document.documentElement.lang=locale},[locale]);
-  useEffect(()=>{if(!menu)return;const closeOnScroll=()=>setMenu(false);window.addEventListener("scroll",closeOnScroll,{passive:true});return()=>window.removeEventListener("scroll",closeOnScroll)},[menu]);
+  useEffect(()=>{if(!menu)return;const closeOnScroll=()=>setMenu(false);window.addEventListener("scroll",closeOnScroll,{passive:true});window.addEventListener("touchmove",closeOnScroll,{passive:true});window.addEventListener("wheel",closeOnScroll,{passive:true});return()=>{window.removeEventListener("scroll",closeOnScroll);window.removeEventListener("touchmove",closeOnScroll);window.removeEventListener("wheel",closeOnScroll)}},[menu]);
   useEffect(()=>{if(!menu&&!serviceDialog)return;const close=(event:KeyboardEvent)=>{if(event.key!=="Escape")return;if(serviceDialog)setServiceDialog(null);else setMenu(false)};const previousOverflow=document.body.style.overflow;document.body.style.overflow="hidden";window.addEventListener("keydown",close);return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",close)}},[menu,serviceDialog]);
   function setLocale(l: Locale){ setLocaleState(l); localStorage.setItem("poc-locale",l); document.documentElement.lang=l; }
   function openService(key: DirectionKey, trigger: HTMLButtonElement){serviceTrigger.current=trigger;setServiceDialog(key)}
