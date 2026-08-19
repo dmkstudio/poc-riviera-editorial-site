@@ -125,7 +125,7 @@ const data = {
       ],
       assurances: [
         "One accountable contact",
-        "A clear first response",
+        "A clear next step",
         "End-to-end coordination",
         "Strict confidentiality",
       ],
@@ -263,7 +263,7 @@ const data = {
       ],
       assurances: [
         "Un interlocuteur responsable",
-        "Une première réponse claire",
+        "Une prochaine étape claire",
         "Une coordination de bout en bout",
         "Une confidentialité absolue",
       ],
@@ -401,7 +401,7 @@ const data = {
       ],
       assurances: [
         "Одна ответственная точка контакта",
-        "Первый чёткий ответ",
+        "Ясный следующий шаг",
         "Координация от начала до конца",
         "Строгая конфиденциальность",
       ],

@@ -139,7 +139,7 @@ function Reveal({children,className=""}:{children:React.ReactNode;className?:str
 
 function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void }) {
   const t = copy(locale);
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const answerId = (index: number) => `faq-chat-answer-${locale}-${index}`;
 
