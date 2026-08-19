@@ -4,7 +4,7 @@
 import { FormEvent, type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { ArrowDown, ArrowRight, Check, ChevronDown, Mail, Menu, Phone, ShieldCheck, X } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, ChevronDown, Mail, Menu, Minus, Phone, Plus, ShieldCheck, X } from "lucide-react";
 import { copy, directionKeys, pillars, type DirectionKey, type Locale } from "./poc-data";
 
 const languages: Locale[] = ["en", "fr", "ru"];
@@ -127,6 +127,8 @@ export default function PocSite() {
 
       <section className="confidential" id="confidentiality"><Reveal className="confidential-copy"><p className="eyebrow">{t.confidentiality.label}</p><h2>{t.confidentiality.title}</h2><p>{t.confidentiality.body}</p></Reveal><div className="confidential-points" aria-label={t.confidentiality.label}>{t.confidentiality.points.map((p,i)=><Reveal key={p} className="point"><span>0{i+1}</span><p>{p}</p></Reveal>)}</div></section>
 
+      <FAQChat locale={locale} onRequest={()=>request("custom")} />
+
       <section className="contact" id="contact"><div className="contact-copy"><p className="eyebrow">{t.form.label}</p><h2>{t.form.title}</h2><p>{t.form.body}</p><Contacts unavailable={t.form.unavailable}/></div><RequestForm key={`${locale}-${active ?? "none"}`} locale={locale} direction={active}/></section>
     </main>
     <footer><Brand label={labels[locale].brand}/><div className="footer-details"><p>{t.footer.line}</p><p>{t.footer.region}</p><nav className="footer-links" aria-label={t.footer.linksLabel}><Link href="/privacy">{t.footer.privacy}</Link><Link href="/legal">{t.footer.legal}</Link></nav></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
@@ -134,6 +136,40 @@ export default function PocSite() {
 }
 
 function Reveal({children,className=""}:{children:React.ReactNode;className?:string}){return <motion.div className={className} initial={false} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.2}}>{children}</motion.div>}
+
+function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void }) {
+  const t = copy(locale);
+  const [openIndex, setOpenIndex] = useState(0);
+  const answerId = (index: number) => `faq-chat-answer-${locale}-${index}`;
+
+  return <section className="faq-chat" id="faq" aria-labelledby="faq-chat-title">
+    <div className="faq-chat-intro">
+      <p className="eyebrow">{t.faq.label}</p>
+      <h2 id="faq-chat-title">{t.faq.title}</h2>
+      <p>{t.faq.body}</p>
+      <div className="faq-chat-cta">
+        <span>{t.faq.ctaPrompt}</span>
+        <button type="button" onClick={onRequest}>{t.faq.cta}<ArrowRight aria-hidden="true" /></button>
+      </div>
+    </div>
+    <div className="faq-chat-list">
+      {t.faq.items.map((item, index) => {
+        const isOpen = openIndex === index;
+        return <div className={`faq-chat-item${isOpen ? " is-open" : ""}`} key={item.question}>
+          <button className="faq-chat-question" type="button" aria-expanded={isOpen} aria-controls={answerId(index)} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
+            <span>{item.question}</span>
+            <span className="faq-chat-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
+          </button>
+          <AnimatePresence initial={false}>
+            {isOpen && <motion.div id={answerId(index)} className="faq-chat-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
+              <p>{item.answer}</p>
+            </motion.div>}
+          </AnimatePresence>
+        </div>;
+      })}
+    </div>
+  </section>;
+}
 
 function ServiceDialog({ locale, direction, onChange, onClose, onRequest }: { locale: Locale; direction: DirectionKey; onChange: (key: DirectionKey) => void; onClose: () => void; onRequest: (key: DirectionKey) => void }) {
   const t = copy(locale); const pillar = pillars[locale][direction]; const detailsId = `service-details-${direction}`;

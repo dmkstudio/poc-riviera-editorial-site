@@ -137,6 +137,29 @@
 @media(max-width:760px){.faq-teaser{margin-left:0;padding:1rem 1.25rem;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem}.faq-teaser strong{font-size:1.05rem}.faq-page-header{height:5.5rem;padding:0 1.25rem}.faq-page-header .brand>span{font-size:2.45rem}.faq-page-header nav{display:none}.faq-page-languages button{padding:.6rem .65rem;font-size:.58rem}.faq-page-hero{display:flex;flex-direction:column}.faq-page-hero-copy{padding:4.4rem 1.25rem 3.5rem}.faq-page-hero-copy h1{font-size:clamp(3.7rem,15vw,5.2rem);max-width:9ch}.faq-page-hero-copy>p:not(.eyebrow){font-size:.95rem}.faq-page-hero-media{min-height:20rem}.faq-page-content{padding:4.5rem 1.25rem}.faq-page-intro{display:block;padding-bottom:2.5rem}.faq-page-intro h2{font-size:clamp(3rem,12vw,4.2rem);margin-top:1rem}.faq-page-group{display:block;padding:2.7rem 0}.faq-page-group>div:first-child{margin-bottom:2rem}.faq-page-group>div:first-child>p:last-child{max-width:22rem}.faq-page-item button{font-size:.92rem;padding:1rem 0}.faq-page-answer p{font-size:.88rem;margin-right:0}.faq-page-cta{padding:4.5rem 1.25rem}.faq-page-footer{grid-template-columns:1fr;gap:1rem;padding:2rem 1.25rem}.faq-page-footer>span{font-size:.62rem}}
 @media(prefers-reduced-motion:reduce){.faq-teaser svg,.faq-page-hero-link svg,.faq-page-item button svg{transition:none}}
 
+/* FAQ chat: a compact message-style conversation, tuned to the POC editorial system. */
+.faq-chat{margin-left:0;display:grid;grid-template-columns:minmax(17rem,.78fr) minmax(0,1.22fr);gap:clamp(3rem,8vw,8rem);padding:clamp(5rem,8vw,8rem) clamp(2rem,7vw,8rem);background:var(--paper);border-top:1px solid var(--line);color:var(--ink)}
+.faq-chat-intro{display:flex;flex-direction:column;align-items:flex-start}
+.faq-chat-intro h2{font-family:var(--serif);font-size:clamp(3.2rem,5vw,5.8rem);font-weight:400;line-height:.9;letter-spacing:-.03em;max-width:8ch;margin:1rem 0 1.6rem}
+.faq-chat-intro>p:not(.eyebrow){max-width:20rem;color:rgba(9,40,79,.72);font-size:.96rem;line-height:1.7;margin:0}
+.faq-chat-cta{margin-top:auto;padding-top:2.2rem;display:grid;gap:.7rem;max-width:21rem;border-top:1px solid rgba(185,154,114,.55)}
+.faq-chat-cta span{color:rgba(9,40,79,.64);font-size:.78rem;line-height:1.5}
+.faq-chat-cta button{display:inline-flex;align-items:center;gap:.7rem;width:max-content;min-height:2.75rem;padding:0;border:0;background:transparent;color:var(--ink);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-align:left}
+.faq-chat-cta button svg{width:1rem;color:var(--sand);transition:transform .25s ease}
+.faq-chat-cta button:hover svg,.faq-chat-cta button:focus-visible svg{transform:translateX(.25rem)}
+.faq-chat-list{display:grid;align-content:start;gap:1rem;min-width:0}
+.faq-chat-item{min-width:0}
+.faq-chat-question{width:calc(100% - 3.5rem);min-height:4.5rem;margin-left:0;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 1.5rem;border:1px solid rgba(9,40,79,.12);border-radius:2.5rem;background:rgba(255,255,255,.62);color:var(--ink);font-size:clamp(.95rem,1.35vw,1.2rem);font-weight:400;line-height:1.35;text-align:left;transition:background .25s ease,border-color .25s ease,transform .25s ease}
+.faq-chat-question:hover{transform:translateX(.2rem);border-color:rgba(185,154,114,.65)}
+.faq-chat-item.is-open .faq-chat-question{background:rgba(218,229,237,.72);border-color:rgba(159,185,208,.8);color:var(--ink)}
+.faq-chat-control{flex:0 0 auto;width:2.5rem;height:2.5rem;display:grid;place-content:center;border:1px solid rgba(9,40,79,.35);border-radius:50%;background:var(--cream)}
+.faq-chat-control svg{width:1.1rem;height:1.1rem;stroke-width:1.5}
+.faq-chat-answer{width:calc(100% - 1.25rem);margin:.1rem 0 0 auto;overflow:hidden}
+.faq-chat-answer p{margin:0;padding:1.35rem 1.6rem 1.45rem;border-radius:1.5rem 1.5rem .35rem 1.5rem;background:var(--navy);color:rgba(255,255,255,.92);font-size:.98rem;line-height:1.7;box-shadow:0 12px 30px rgba(5,41,85,.12)}
+.faq-chat-question:focus-visible,.faq-chat-cta button:focus-visible{outline:2px solid var(--sand);outline-offset:4px}
+@media(max-width:760px){.faq-chat{display:block;padding:4.5rem 1.25rem}.faq-chat-intro{margin-bottom:2.8rem}.faq-chat-intro h2{font-size:clamp(3.2rem,13vw,4.4rem);max-width:9ch}.faq-chat-intro>p:not(.eyebrow){max-width:23rem}.faq-chat-cta{margin-top:2.5rem;max-width:none}.faq-chat-list{gap:.75rem}.faq-chat-question{width:calc(100% - 2rem);min-height:4rem;padding:1rem 1rem 1rem 1.15rem;border-radius:1.8rem;font-size:.96rem}.faq-chat-control{width:2.2rem;height:2.2rem}.faq-chat-answer{width:calc(100% - .5rem)}.faq-chat-answer p{padding:1.15rem 1.15rem 1.25rem;font-size:.92rem;line-height:1.65;border-radius:1.25rem 1.25rem .3rem 1.25rem}}
+@media(prefers-reduced-motion:reduce){.faq-chat-question,.faq-chat-cta button svg{transition:none}.faq-chat-question:hover{transform:none}}
+
 /* Shared serif with full Cyrillic support, plus a restrained Liquid Glass control. */
 :root{--serif:'Cormorant Garamond',Georgia,serif}
 .language{position:relative;isolation:isolate;display:flex;align-items:center;padding:.22rem;border:1px solid rgba(255,255,255,.72);border-radius:999px;overflow:visible;background:linear-gradient(135deg,rgba(255,255,255,.54),rgba(229,239,245,.26));box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -9px 17px rgba(7,40,73,.07),0 10px 26px rgba(25,44,64,.1);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%)}
