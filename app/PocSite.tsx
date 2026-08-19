@@ -167,11 +167,9 @@ function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void 
                 <span>{item.question}</span>
                 <span className="faq-stack-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
               </button>
-              <AnimatePresence initial={false}>
-                {isOpen && <motion.div id={answerId(index)} className="faq-stack-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
-                  <p>{item.answer}</p>
-                </motion.div>}
-              </AnimatePresence>
+              <motion.div id={answerId(index)} className="faq-stack-answer" role="region" aria-label={item.question} aria-hidden={!isOpen} initial={false} animate={{gridTemplateRows:isOpen ? "1fr" : "0fr",opacity:isOpen ? 1 : 0}} transition={{duration:.28,ease:[.22,1,.36,1]}}>
+                <div className="faq-stack-answer-inner"><p>{item.answer}</p></div>
+              </motion.div>
             </div>;
           })}
         </div>
