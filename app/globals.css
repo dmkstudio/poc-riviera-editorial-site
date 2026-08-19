@@ -1391,9 +1391,9 @@ header{
     min-height:3.05rem;
     padding:.7rem .8rem;
     font-size:1rem;
-    border:0;
+    border:1px solid rgba(9,40,79,.13);
     border-radius:.68rem;
-    background:transparent;
+    background:rgba(255,255,255,.52);
   }
 
   .contact .form .select{display:block}
@@ -1430,6 +1430,13 @@ header{
     border-color:rgba(185,154,114,.75);
     background:rgba(255,255,255,.78);
     box-shadow:0 0 0 3px rgba(185,154,114,.16),inset 0 1px 0 rgba(255,255,255,.88);
+  }
+
+  .contact .form input::placeholder,
+  .contact .form textarea::placeholder{color:rgba(9,40,79,.42)}
+
+  .contact .form>label:not(.honeypot):not(.task){
+    padding-bottom:.1rem;
   }
 
   .contact .form .privacy{display:none!important}
