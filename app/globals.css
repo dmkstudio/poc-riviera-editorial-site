@@ -1342,3 +1342,115 @@ header{
     outline:none;
   }
 }
+
+/* Mobile request form: a quiet paper panel with tactile fields, not a desktop
+   form compressed into a phone viewport. The privacy note is intentionally
+   kept on larger screens and omitted here to keep the request flow focused. */
+@media(max-width:760px){
+  .contact .form{
+    grid-template-columns:1fr;
+    gap:1rem;
+    padding:1.35rem 1.15rem 1.2rem;
+    border:1px solid rgba(9,40,79,.13);
+    border-radius:1.1rem;
+    background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(250,248,243,.92));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 12px 28px rgba(9,40,79,.08);
+  }
+
+  .contact .form::before{display:none}
+
+  .contact .form>label:not(.honeypot):not(.task),
+  .contact .form .task{
+    grid-column:1/-1;
+    height:auto;
+    min-height:0;
+  }
+
+  .contact .form label{
+    gap:.42rem;
+    font-size:.75rem;
+    letter-spacing:.025em;
+  }
+
+  .contact .form label>span:first-child{
+    color:rgba(9,40,79,.72);
+    transition:color .2s ease;
+  }
+
+  .contact .form input,
+  .contact .form .select,
+  .contact .form textarea{
+    border:1px solid rgba(9,40,79,.13);
+    border-radius:.68rem;
+    background:rgba(255,255,255,.52);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .contact .form input,
+  .contact .form select{
+    min-height:3.05rem;
+    padding:.7rem .8rem;
+    font-size:1rem;
+    border:0;
+    border-radius:.68rem;
+    background:transparent;
+  }
+
+  .contact .form .select{display:block}
+
+  .contact .form .select svg{
+    right:.85rem;
+    bottom:1rem;
+    color:rgba(9,40,79,.68);
+  }
+
+  .contact .form textarea{
+    min-height:8rem;
+    padding:.8rem;
+    font-size:1rem;
+    line-height:1.55;
+    resize:vertical;
+  }
+
+  .contact .form :is(input,select,textarea){
+    outline:none;
+    transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+  }
+
+  /* Empty required fields are an invitation, not an error state. */
+  .contact .form :is(input,select,textarea):invalid{
+    border-color:rgba(9,40,79,.13);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .contact .form label:focus-within>span:first-child{color:var(--ink)}
+
+  .contact .form :is(input,select,textarea):focus,
+  .contact .form :is(input,select,textarea):focus-visible{
+    border-color:rgba(185,154,114,.75);
+    background:rgba(255,255,255,.78);
+    box-shadow:0 0 0 3px rgba(185,154,114,.16),inset 0 1px 0 rgba(255,255,255,.88);
+  }
+
+  .contact .form .privacy{display:none!important}
+
+  .contact .form .form-status{min-height:0;margin:0}
+
+  .contact .form .submit{
+    grid-column:1/-1;
+    min-height:3.35rem;
+    margin-top:.15rem;
+    border-radius:.72rem;
+    box-shadow:0 9px 20px rgba(9,40,79,.15);
+  }
+
+  .contact .form.success{
+    min-height:20rem;
+    padding:2rem 1.5rem;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .contact .form :is(input,select,textarea),
+  .contact .form label>span:first-child{transition:none}
+}
