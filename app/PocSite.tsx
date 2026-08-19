@@ -127,9 +127,9 @@ export default function PocSite() {
 
       <section className="confidential" id="confidentiality"><Reveal className="confidential-copy"><p className="eyebrow">{t.confidentiality.label}</p><h2>{t.confidentiality.title}</h2><p>{t.confidentiality.body}</p></Reveal><div className="confidential-points" aria-label={t.confidentiality.label}>{t.confidentiality.points.map((p,i)=><Reveal key={p} className="point"><span>0{i+1}</span><p>{p}</p></Reveal>)}</div></section>
 
-      <FAQChat locale={locale} onRequest={()=>request("custom")} />
-
       <section className="contact" id="contact"><div className="contact-copy"><p className="eyebrow">{t.form.label}</p><h2>{t.form.title}</h2><p>{t.form.body}</p><Contacts unavailable={t.form.unavailable}/></div><RequestForm key={`${locale}-${active ?? "none"}`} locale={locale} direction={active}/></section>
+
+      <FAQChat locale={locale} onRequest={()=>request("custom")} />
     </main>
     <footer><Brand label={labels[locale].brand}/><div className="footer-details"><p>{t.footer.line}</p><p>{t.footer.region}</p><nav className="footer-links" aria-label={t.footer.linksLabel}><Link href="/privacy">{t.footer.privacy}</Link><Link href="/legal">{t.footer.legal}</Link></nav></div><p className="copyright">© {new Date().getFullYear()} {t.footer.rights}</p></footer>
   </div><AnimatePresence>{serviceDialog&&<ServiceDialog locale={locale} direction={serviceDialog} onChange={setServiceDialog} onClose={closeService} onRequest={request}/>}</AnimatePresence></MotionConfig>;
