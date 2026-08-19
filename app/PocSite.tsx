@@ -149,8 +149,8 @@ function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void 
       <span className="faq-stack-toggle-title" id="faq-stack-title">{t.faq.pageTitle}</span>
       <span className="faq-stack-toggle-action">{detailsOpen ? t.faq.less : t.faq.more}<ChevronDown aria-hidden="true" /></span>
     </button>
-    <AnimatePresence initial={false}>
-      {detailsOpen && <motion.div id="faq-stack-details" className="faq-stack-details" initial={{opacity:0,y:12,scale:.985}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:8,scale:.99}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
+    <motion.div id="faq-stack-details" className="faq-stack-details" role="region" aria-hidden={!detailsOpen} initial={false} animate={{gridTemplateRows:detailsOpen ? "1fr" : "0fr",opacity:detailsOpen ? 1 : 0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
+      <div className="faq-stack-details-inner">
         <div className="faq-stack-intro">
           <h2>{t.faq.pageTitle}</h2>
           <p>{t.faq.body}</p>
@@ -173,8 +173,8 @@ function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void 
             </div>;
           })}
         </div>
-      </motion.div>}
-    </AnimatePresence>
+      </div>
+    </motion.div>
   </section>;
 }
 

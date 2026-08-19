@@ -192,14 +192,13 @@
 .faq-stack.is-expanded .faq-stack-toggle-action svg{transform:rotate(180deg)}
 .faq-stack-toggle:hover .faq-stack-toggle-title,.faq-stack-toggle:focus-visible .faq-stack-toggle-title{color:var(--sand)}
 .faq-stack-toggle:focus-visible{outline:2px solid var(--sand);outline-offset:-4px;border-radius:.4rem}
-.faq-stack.is-expanded{position:relative;z-index:40}
-.faq-stack-details{position:absolute;z-index:2;left:clamp(1.25rem,4.5vw,4.5rem);right:clamp(1.25rem,4.5vw,4.5rem);bottom:calc(100% + .75rem);max-height:min(72vh,44rem);overflow-y:auto;overflow-x:hidden;padding:0 clamp(1.25rem,3vw,3rem) clamp(1.5rem,3vw,2.5rem);border:1px solid rgba(9,40,79,.12);border-radius:1.15rem;background:var(--cream);box-shadow:0 22px 55px rgba(9,40,79,.16);transform-origin:bottom center;overscroll-behavior:contain}
-.faq-stack-details::-webkit-scrollbar{width:.35rem}.faq-stack-details::-webkit-scrollbar-thumb{background:rgba(185,154,114,.65);border-radius:999px}
+.faq-stack-details{display:grid;grid-template-rows:0fr;overflow:hidden;padding:0;opacity:0}
+.faq-stack-details-inner{min-height:0;overflow:hidden}
 .faq-stack-details .faq-stack-intro{padding-top:clamp(2.3rem,4vw,4rem)}
 .faq-stack-details .faq-stack-intro h2{font-family:var(--serif);font-size:clamp(2.7rem,4.4vw,4.8rem);font-weight:400;letter-spacing:-.03em;line-height:.96;max-width:13ch}
 .faq-stack-details .faq-stack-intro>p{max-width:30rem;color:rgba(9,40,79,.68);font-size:.9rem;line-height:1.65;margin:.9rem 0 0}
 .faq-stack-details .faq-stack-cta{margin-top:1.1rem}
-@media(max-width:760px){.faq-stack{padding-left:1.1rem;padding-right:1.1rem}.faq-stack:not(.is-expanded){padding-top:0;padding-bottom:0}.faq-stack-toggle{min-height:4.25rem;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem}.faq-stack-toggle-label{font-size:.58rem}.faq-stack-toggle-title{font-size:.92rem;line-height:1.2}.faq-stack-toggle-action{font-size:.58rem;gap:.25rem}.faq-stack-toggle-action svg{width:.85rem}.faq-stack-details{left:1.1rem;right:1.1rem;bottom:calc(100% + .55rem);max-height:75vh;padding:0 1.05rem 1.2rem;border-radius:1rem}.faq-stack-details .faq-stack-intro{padding-top:2.1rem}.faq-stack-details .faq-stack-intro h2{font-size:clamp(2.45rem,11vw,3.7rem);max-width:11ch}.faq-stack-details .faq-stack-intro>p{font-size:.88rem}}
+@media(max-width:760px){.faq-stack{padding-left:1.1rem;padding-right:1.1rem}.faq-stack:not(.is-expanded){padding-top:0;padding-bottom:0}.faq-stack-toggle{min-height:4.25rem;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem}.faq-stack-toggle-label{font-size:.58rem}.faq-stack-toggle-title{font-size:.92rem;line-height:1.2}.faq-stack-toggle-action{font-size:.58rem;gap:.25rem}.faq-stack-toggle-action svg{width:.85rem}.faq-stack-details{padding:0}.faq-stack-details .faq-stack-intro{padding-top:2.1rem}.faq-stack-details .faq-stack-intro h2{font-size:clamp(2.45rem,11vw,3.7rem);max-width:11ch}.faq-stack-details .faq-stack-intro>p{font-size:.88rem}}
 
 /* One layout transition for the answer and its following siblings; no height:auto race. */
 .faq-stack-answer{display:grid;grid-template-rows:0fr;padding:0 1.8rem;overflow:hidden;opacity:0;transition:none}
