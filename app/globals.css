@@ -1325,3 +1325,20 @@ header{
   .socials .contact-channel-copy>span{font-size:.9rem}
   .socials .contact-channel-copy>small{font-size:.82rem}
 }
+
+/* Keep touch interaction quiet on mobile without removing keyboard focus. */
+@media(max-width:760px){
+  button,a,select,input,textarea,[role="button"]{
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+
+  button:focus:not(:focus-visible),
+  a:focus:not(:focus-visible),
+  select:focus:not(:focus-visible),
+  input:focus:not(:focus-visible),
+  textarea:focus:not(:focus-visible),
+  [role="button"]:focus:not(:focus-visible){
+    outline:none;
+  }
+}
