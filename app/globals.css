@@ -182,6 +182,23 @@
 @media(max-width:760px){.faq-stack{padding:4rem 1.1rem 4rem}.faq-stack-intro{margin-bottom:2.2rem}.faq-stack-intro h2{font-size:clamp(2.45rem,11vw,3.7rem);max-width:11ch}.faq-stack-cta{align-items:center;flex-wrap:wrap;font-size:.92rem;margin-top:1rem}.faq-stack-list{gap:.6rem}.faq-stack-item{border-radius:1.15rem}.faq-stack-question{min-height:4.15rem;padding:.95rem 1.05rem;font-size:.95rem;gap:.8rem}.faq-stack-control{width:1.35rem;height:1.35rem}.faq-stack-control svg{width:1.1rem;height:1.1rem}.faq-stack-answer{padding:0 1.05rem 1.2rem}.faq-stack-answer p{font-size:.9rem;line-height:1.6}}
 @media(prefers-reduced-motion:reduce){.faq-stack-item,.faq-stack-cta button svg{transition:none}.faq-stack-cta button:hover svg{transform:none}}
 
+/* Collapsed FAQ doorway: the detailed accordion appears only on intent. */
+.faq-stack:not(.is-expanded){padding-top:0;padding-bottom:0}
+.faq-stack-toggle{width:100%;min-height:4.7rem;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1.2rem;padding:0;border:0;background:transparent;color:var(--ink);text-align:left}
+.faq-stack-toggle-label{color:var(--sand);font-size:.64rem;letter-spacing:.15em;text-transform:uppercase}
+.faq-stack-toggle-title{font-family:var(--sans);font-size:clamp(1rem,1.5vw,1.25rem);font-weight:400}
+.faq-stack-toggle-action{display:inline-flex;align-items:center;gap:.55rem;color:rgba(9,40,79,.68);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.faq-stack-toggle-action svg{width:1rem;color:var(--sand);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.faq-stack.is-expanded .faq-stack-toggle-action svg{transform:rotate(180deg)}
+.faq-stack-toggle:hover .faq-stack-toggle-title,.faq-stack-toggle:focus-visible .faq-stack-toggle-title{color:var(--sand)}
+.faq-stack-toggle:focus-visible{outline:2px solid var(--sand);outline-offset:-4px;border-radius:.4rem}
+.faq-stack-details{overflow:hidden}
+.faq-stack-details .faq-stack-intro{padding-top:clamp(2.3rem,4vw,4rem)}
+.faq-stack-details .faq-stack-intro h2{font-family:var(--serif);font-size:clamp(2.7rem,4.4vw,4.8rem);font-weight:400;letter-spacing:-.03em;line-height:.96;max-width:13ch}
+.faq-stack-details .faq-stack-intro>p{max-width:30rem;color:rgba(9,40,79,.68);font-size:.9rem;line-height:1.65;margin:.9rem 0 0}
+.faq-stack-details .faq-stack-cta{margin-top:1.1rem}
+@media(max-width:760px){.faq-stack{padding-left:1.1rem;padding-right:1.1rem}.faq-stack:not(.is-expanded){padding-top:0;padding-bottom:0}.faq-stack-toggle{min-height:4.25rem;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem}.faq-stack-toggle-label{font-size:.58rem}.faq-stack-toggle-title{font-size:.92rem;line-height:1.2}.faq-stack-toggle-action{font-size:.58rem;gap:.25rem}.faq-stack-toggle-action svg{width:.85rem}.faq-stack-details .faq-stack-intro{padding-top:2.1rem}.faq-stack-details .faq-stack-intro h2{font-size:clamp(2.45rem,11vw,3.7rem);max-width:11ch}.faq-stack-details .faq-stack-intro>p{font-size:.88rem}}
+
 /* Shared serif with full Cyrillic support, plus a restrained Liquid Glass control. */
 :root{--serif:'Cormorant Garamond',Georgia,serif}
 .language{position:relative;isolation:isolate;display:flex;align-items:center;padding:.22rem;border:1px solid rgba(255,255,255,.72);border-radius:999px;overflow:visible;background:linear-gradient(135deg,rgba(255,255,255,.54),rgba(229,239,245,.26));box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -9px 17px rgba(7,40,73,.07),0 10px 26px rgba(25,44,64,.1);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%)}

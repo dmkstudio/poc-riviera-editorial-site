@@ -140,33 +140,43 @@ function Reveal({children,className=""}:{children:React.ReactNode;className?:str
 function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void }) {
   const t = copy(locale);
   const [openIndex, setOpenIndex] = useState(0);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const answerId = (index: number) => `faq-chat-answer-${locale}-${index}`;
 
-  return <section className="faq-stack" id="faq" aria-labelledby="faq-stack-title">
-    <div className="faq-stack-intro">
-      <p className="eyebrow">{t.faq.label}</p>
-      <h2 id="faq-stack-title">{t.faq.pageTitle}</h2>
-      <div className="faq-stack-cta">
-        <span>{t.faq.ctaPrompt}</span>
-        <button type="button" onClick={onRequest}>{t.faq.cta}<ArrowRight aria-hidden="true" /></button>
-      </div>
-    </div>
-    <div className="faq-stack-list">
-      {t.faq.items.map((item, index) => {
-        const isOpen = openIndex === index;
-        return <div className={`faq-stack-item${isOpen ? " is-open" : ""}`} key={item.question}>
-          <button className="faq-stack-question" type="button" aria-expanded={isOpen} aria-controls={answerId(index)} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
-            <span>{item.question}</span>
-            <span className="faq-stack-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
-          </button>
-          <AnimatePresence initial={false}>
-            {isOpen && <motion.div id={answerId(index)} className="faq-stack-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
-              <p>{item.answer}</p>
-            </motion.div>}
-          </AnimatePresence>
-        </div>;
-      })}
-    </div>
+  return <section className={`faq-stack${detailsOpen ? " is-expanded" : ""}`} id="faq" aria-labelledby="faq-stack-title">
+    <button className="faq-stack-toggle" type="button" aria-expanded={detailsOpen} aria-controls="faq-stack-details" onClick={() => setDetailsOpen(value => !value)}>
+      <span className="faq-stack-toggle-label">{t.faq.label}</span>
+      <span className="faq-stack-toggle-title" id="faq-stack-title">{t.faq.pageTitle}</span>
+      <span className="faq-stack-toggle-action">{detailsOpen ? t.faq.less : t.faq.more}<ChevronDown aria-hidden="true" /></span>
+    </button>
+    <AnimatePresence initial={false}>
+      {detailsOpen && <motion.div id="faq-stack-details" className="faq-stack-details" initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.36,ease:[.22,1,.36,1]}}>
+        <div className="faq-stack-intro">
+          <h2>{t.faq.pageTitle}</h2>
+          <p>{t.faq.body}</p>
+          <div className="faq-stack-cta">
+            <span>{t.faq.ctaPrompt}</span>
+            <button type="button" onClick={onRequest}>{t.faq.cta}<ArrowRight aria-hidden="true" /></button>
+          </div>
+        </div>
+        <div className="faq-stack-list">
+          {t.faq.items.map((item, index) => {
+            const isOpen = openIndex === index;
+            return <div className={`faq-stack-item${isOpen ? " is-open" : ""}`} key={item.question}>
+              <button className="faq-stack-question" type="button" aria-expanded={isOpen} aria-controls={answerId(index)} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
+                <span>{item.question}</span>
+                <span className="faq-stack-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && <motion.div id={answerId(index)} className="faq-stack-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
+                  <p>{item.answer}</p>
+                </motion.div>}
+              </AnimatePresence>
+            </div>;
+          })}
+        </div>
+      </motion.div>}
+    </AnimatePresence>
   </section>;
 }
 

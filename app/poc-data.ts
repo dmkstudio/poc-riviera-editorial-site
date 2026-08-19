@@ -219,6 +219,8 @@ const data = {
       back: "Back to POC",
       ctaPrompt: "Didn't find what you were looking for?",
       cta: "Make an individual request",
+      more: "Learn more",
+      less: "Close FAQ",
       items: [
         { question: "What kind of requests do you handle?", answer: "We coordinate private and professional matters across business, property, relocation, mobility and digital presence." },
         { question: "Can I send an individual request?", answer: "Yes. If your situation does not fit one direction, choose Custom request and describe the outcome you need." },
@@ -355,6 +357,8 @@ const data = {
       back: "Retour à POC",
       ctaPrompt: "Vous n’avez pas trouvé votre réponse ?",
       cta: "Faire une demande sur mesure",
+      more: "En savoir plus",
+      less: "Fermer la FAQ",
       items: [
         { question: "Quels types de demandes accompagnez-vous ?", answer: "Nous coordonnons des enjeux privés et professionnels liés à l’entreprise, l’immobilier, la relocalisation, la mobilité et la présence digitale." },
         { question: "Puis-je envoyer une demande sur mesure ?", answer: "Oui. Si votre situation ne correspond pas à une expertise, choisissez Demande sur mesure et décrivez le résultat recherché." },
@@ -491,6 +495,8 @@ const data = {
       back: "Вернуться в POC",
       ctaPrompt: "Не нашли ответа на свой вопрос?",
       cta: "Сделать индивидуальный запрос",
+      more: "Узнать больше",
+      less: "Скрыть FAQ",
       items: [
         { question: "С какими запросами вы работаете?", answer: "Мы координируем личные и профессиональные задачи в сфере бизнеса, недвижимости, релокации, мобильности и цифрового присутствия." },
         { question: "Можно ли отправить индивидуальный запрос?", answer: "Да. Если задача не подходит ни под одно направление, выберите «Индивидуальный запрос» и опишите желаемый результат." },
