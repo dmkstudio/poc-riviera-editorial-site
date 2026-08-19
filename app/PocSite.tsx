@@ -142,26 +142,25 @@ function FAQChat({ locale, onRequest }: { locale: Locale; onRequest: () => void 
   const [openIndex, setOpenIndex] = useState(0);
   const answerId = (index: number) => `faq-chat-answer-${locale}-${index}`;
 
-  return <section className="faq-chat" id="faq" aria-labelledby="faq-chat-title">
-    <div className="faq-chat-intro">
+  return <section className="faq-stack" id="faq" aria-labelledby="faq-stack-title">
+    <div className="faq-stack-intro">
       <p className="eyebrow">{t.faq.label}</p>
-      <h2 id="faq-chat-title">{t.faq.title}</h2>
-      <p>{t.faq.body}</p>
-      <div className="faq-chat-cta">
+      <h2 id="faq-stack-title">{t.faq.pageTitle}</h2>
+      <div className="faq-stack-cta">
         <span>{t.faq.ctaPrompt}</span>
         <button type="button" onClick={onRequest}>{t.faq.cta}<ArrowRight aria-hidden="true" /></button>
       </div>
     </div>
-    <div className="faq-chat-list">
+    <div className="faq-stack-list">
       {t.faq.items.map((item, index) => {
         const isOpen = openIndex === index;
-        return <div className={`faq-chat-item${isOpen ? " is-open" : ""}`} key={item.question}>
-          <button className="faq-chat-question" type="button" aria-expanded={isOpen} aria-controls={answerId(index)} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
+        return <div className={`faq-stack-item${isOpen ? " is-open" : ""}`} key={item.question}>
+          <button className="faq-stack-question" type="button" aria-expanded={isOpen} aria-controls={answerId(index)} onClick={() => setOpenIndex(isOpen ? -1 : index)}>
             <span>{item.question}</span>
-            <span className="faq-chat-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
+            <span className="faq-stack-control" aria-hidden="true">{isOpen ? <Minus /> : <Plus />}</span>
           </button>
           <AnimatePresence initial={false}>
-            {isOpen && <motion.div id={answerId(index)} className="faq-chat-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
+            {isOpen && <motion.div id={answerId(index)} className="faq-stack-answer" role="region" aria-label={item.question} initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} transition={{duration:.32,ease:[.22,1,.36,1]}}>
               <p>{item.answer}</p>
             </motion.div>}
           </AnimatePresence>

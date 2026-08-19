@@ -160,6 +160,28 @@
 @media(max-width:760px){.faq-chat{display:block;padding:4.5rem 1.25rem}.faq-chat-intro{margin-bottom:2.8rem}.faq-chat-intro h2{font-size:clamp(3.2rem,13vw,4.4rem);max-width:9ch}.faq-chat-intro>p:not(.eyebrow){max-width:23rem}.faq-chat-cta{margin-top:2.5rem;max-width:none}.faq-chat-list{gap:.75rem}.faq-chat-question{width:calc(100% - 2rem);min-height:4rem;padding:1rem 1rem 1rem 1.15rem;border-radius:1.8rem;font-size:.96rem}.faq-chat-control{width:2.2rem;height:2.2rem}.faq-chat-answer{width:calc(100% - .5rem)}.faq-chat-answer p{padding:1.15rem 1.15rem 1.25rem;font-size:.92rem;line-height:1.65;border-radius:1.25rem 1.25rem .3rem 1.25rem}}
 @media(prefers-reduced-motion:reduce){.faq-chat-question,.faq-chat-cta button svg{transition:none}.faq-chat-question:hover{transform:none}}
 
+/* FAQ direction: full-width editorial accordion based on the approved reference. */
+.faq-stack{padding:clamp(5.5rem,9vw,9rem) clamp(1.25rem,4.5vw,4.5rem) clamp(5rem,8vw,8rem);background:var(--cream);border-top:1px solid var(--line);color:var(--ink)}
+.faq-stack-intro{text-align:center;display:flex;flex-direction:column;align-items:center;margin:0 auto clamp(3.5rem,6vw,6rem)}
+.faq-stack-intro .eyebrow{margin:0 0 1.25rem}
+.faq-stack-intro h2{font-family:var(--sans);font-size:clamp(3.1rem,7vw,7rem);font-weight:500;line-height:.98;letter-spacing:-.055em;margin:0;max-width:14ch}
+.faq-stack-cta{display:flex;align-items:center;justify-content:center;gap:.45rem;margin-top:1.5rem;color:rgba(9,40,79,.72);font-size:clamp(1rem,1.8vw,1.55rem);line-height:1.3}
+.faq-stack-cta button{display:inline-flex;align-items:center;gap:.5rem;padding:0;border:0;background:none;color:var(--ink);font-weight:500;text-decoration:underline;text-decoration-color:rgba(185,154,114,.85);text-decoration-thickness:1px;text-underline-offset:.22em}
+.faq-stack-cta button svg{width:1.2em;transition:transform .25s ease}
+.faq-stack-cta button:hover svg,.faq-stack-cta button:focus-visible svg{transform:translateX(.25rem)}
+.faq-stack-list{display:grid;gap:1.1rem;max-width:100rem;margin:0 auto}
+.faq-stack-item{border-radius:1.65rem;background:rgba(238,238,237,.78);overflow:hidden;transition:background .3s ease,box-shadow .3s ease}
+.faq-stack-item.is-open{background:rgba(255,255,255,.94);box-shadow:0 10px 24px rgba(9,40,79,.08),0 1px 2px rgba(9,40,79,.12)}
+.faq-stack-question{width:100%;min-height:6.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;padding:1.45rem 2.2rem;border:0;background:transparent;color:rgba(24,31,36,.82);font-family:var(--sans);font-size:clamp(1.15rem,2vw,1.8rem);font-weight:400;line-height:1.25;text-align:left}
+.faq-stack-item.is-open .faq-stack-question{font-weight:500;color:#181f24}
+.faq-stack-control{flex:0 0 auto;display:grid;place-content:center;width:1.8rem;height:1.8rem}
+.faq-stack-control svg{width:1.45rem;height:1.45rem;stroke-width:1.6}
+.faq-stack-answer{padding:0 2.2rem 2.1rem;overflow:hidden}
+.faq-stack-answer p{max-width:68rem;margin:0;color:rgba(24,31,36,.72);font-size:clamp(1rem,1.6vw,1.4rem);line-height:1.65}
+.faq-stack-question:focus-visible,.faq-stack-cta button:focus-visible{outline:2px solid var(--sand);outline-offset:-5px;border-radius:1.65rem}
+@media(max-width:760px){.faq-stack{padding:4.75rem 1.1rem 4.5rem}.faq-stack-intro{margin-bottom:2.7rem}.faq-stack-intro h2{font-size:clamp(2.8rem,13vw,4.6rem);max-width:10ch}.faq-stack-cta{align-items:center;flex-wrap:wrap;font-size:1rem;margin-top:1.25rem}.faq-stack-list{gap:.7rem}.faq-stack-item{border-radius:1.25rem}.faq-stack-question{min-height:4.75rem;padding:1.15rem 1.2rem;font-size:1.05rem;gap:1rem}.faq-stack-control{width:1.5rem;height:1.5rem}.faq-stack-control svg{width:1.2rem;height:1.2rem}.faq-stack-answer{padding:0 1.2rem 1.45rem}.faq-stack-answer p{font-size:.98rem;line-height:1.6}}
+@media(prefers-reduced-motion:reduce){.faq-stack-item,.faq-stack-cta button svg{transition:none}.faq-stack-cta button:hover svg{transform:none}}
+
 /* Shared serif with full Cyrillic support, plus a restrained Liquid Glass control. */
 :root{--serif:'Cormorant Garamond',Georgia,serif}
 .language{position:relative;isolation:isolate;display:flex;align-items:center;padding:.22rem;border:1px solid rgba(255,255,255,.72);border-radius:999px;overflow:visible;background:linear-gradient(135deg,rgba(255,255,255,.54),rgba(229,239,245,.26));box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -9px 17px rgba(7,40,73,.07),0 10px 26px rgba(25,44,64,.1);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%)}
