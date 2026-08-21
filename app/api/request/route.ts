@@ -135,35 +135,36 @@ export async function POST(request: Request) {
   try {
     const id = crypto.randomUUID();
     const d1 = env.DB;
-    if (!d1) return json({ ok: false, error: "unavailable" }, 503);
-    await d1.batch([
-      d1.prepare(`CREATE TABLE IF NOT EXISTS requests (
-        id TEXT PRIMARY KEY NOT NULL,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        phone TEXT,
-        direction TEXT NOT NULL,
-        task TEXT NOT NULL,
-        locale TEXT NOT NULL,
-        source_path TEXT NOT NULL,
-        status TEXT DEFAULT 'new' NOT NULL,
-        created_at INTEGER NOT NULL
-      )`),
-      d1.prepare("CREATE INDEX IF NOT EXISTS idx_requests_created_at ON requests(created_at)"),
-      d1.prepare("CREATE INDEX IF NOT EXISTS idx_requests_status_created_at ON requests(status, created_at)"),
-    ]);
-    await getDb().insert(requests).values({
-      id,
-      name,
-      email,
-      phone: phone || null,
-      direction,
-      task,
-      locale,
-      sourcePath,
-      status: "new",
-      createdAt: Date.now(),
-    });
+    if (d1) {
+      await d1.batch([
+        d1.prepare(`CREATE TABLE IF NOT EXISTS requests (
+          id TEXT PRIMARY KEY NOT NULL,
+          name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          phone TEXT,
+          direction TEXT NOT NULL,
+          task TEXT NOT NULL,
+          locale TEXT NOT NULL,
+          source_path TEXT NOT NULL,
+          status TEXT DEFAULT 'new' NOT NULL,
+          created_at INTEGER NOT NULL
+        )`),
+        d1.prepare("CREATE INDEX IF NOT EXISTS idx_requests_created_at ON requests(created_at)"),
+        d1.prepare("CREATE INDEX IF NOT EXISTS idx_requests_status_created_at ON requests(status, created_at)"),
+      ]);
+      await getDb().insert(requests).values({
+        id,
+        name,
+        email,
+        phone: phone || null,
+        direction,
+        task,
+        locale,
+        sourcePath,
+        status: "new",
+        createdAt: Date.now(),
+      });
+    }
     try {
       await sendRequestEmail({ name, email, phone, direction, task, locale, sourcePath });
     } catch (error) {
