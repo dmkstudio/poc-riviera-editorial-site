@@ -14,7 +14,7 @@ function WhatsAppMark() { return <span className="contact-brand-icon whatsapp-ic
 const contactLinks = [
   { name: "Instagram", Icon: InstagramMark, channel: "instagram" },
   { name: "WhatsApp", Icon: WhatsAppMark, channel: "whatsapp", href: "https://wa.me/33604116140", detail: "+33 6 04 11 61 40" },
-  { name: "Email", Icon: Mail, channel: "email", href: "mailto:conact.poc@gmail.com", detail: "conact.poc@gmail.com" },
+  { name: "Email", Icon: Mail, channel: "email", href: "mailto:contact.poc@gmail.com", detail: "contact.poc@gmail.com" },
   { name: "Call", Icon: Phone, channel: "call", href: "tel:+33748613632", detail: "+33 7 48 61 36 32" },
 ];
 
@@ -62,8 +62,12 @@ export default function PocSite() {
   useEffect(()=>{const saved=localStorage.getItem("poc-locale") as Locale|null;const timer=window.setTimeout(()=>{if(saved&&languages.includes(saved))setLocaleState(saved)},0);return()=>window.clearTimeout(timer)},[]);
   useEffect(()=>{
     const storageKey="poc-scroll-y";
+    const visitKey="poc-has-visited";
     const navigation=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     const isReload=navigation?.type==="reload";
+    const hasVisited=sessionStorage.getItem(visitKey)==="1";
+    const shouldRestore=isReload&&hasVisited;
+    sessionStorage.setItem(visitKey,"1");
     if("scrollRestoration" in history) history.scrollRestoration="manual";
     const scrollToHash=(behavior:ScrollBehavior="auto")=>{
       const id=decodeURIComponent(window.location.hash.slice(1));
@@ -71,7 +75,7 @@ export default function PocSite() {
       document.getElementById(id)?.scrollIntoView({behavior,block:"start"});
     };
     const restore=()=>window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
-      if(isReload){
+      if(shouldRestore){
         const saved=Number(sessionStorage.getItem(storageKey));
         if(Number.isFinite(saved)) window.scrollTo({top:saved,left:0,behavior:"auto"});
         else scrollToHash();
