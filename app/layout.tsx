@@ -9,8 +9,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{__html:"if ('scrollRestoration' in history) history.scrollRestoration = 'manual';"}} />
+      </head>
       <body>{children}</body>
     </html>
   );
 }
-export async function generateMetadata():Promise<Metadata>{const h=await headers();const host=h.get("x-forwarded-host")??h.get("host");const base=host?new URL(`${h.get("x-forwarded-proto")??"https"}://${host}`):undefined;return{metadataBase:base,title:"POC — Private Office Consulting",description:"Discreet consulting and concierge on the French Riviera.",icons:{icon:"/favicon.svg"},openGraph:{title:"POC — Private Office Consulting",description:"One call. Everything else is our concern.",images:[{url:"/og.png",width:1200,height:630,alt:"POC"}]},twitter:{card:"summary_large_image",images:["/og.png"]}}}
+export async function generateMetadata():Promise<Metadata>{const h=await headers();const host=h.get("x-forwarded-host")??h.get("host");const protocol=host?.startsWith("localhost")?"http":h.get("x-forwarded-proto")??"https";const base=host?new URL(`${protocol}://${host}`):undefined;return{metadataBase:base,title:"POC — Private Office Consulting",description:"Discreet consulting and concierge on the French Riviera.",icons:{icon:"/favicon.svg"},openGraph:{title:"POC — Private Office Consulting",description:"One call. Everything else is our concern.",images:[{url:"/og.png",width:1200,height:630,alt:"POC"}]},twitter:{card:"summary_large_image",images:["/og.png"]}}}

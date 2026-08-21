@@ -1,11 +1,13 @@
 import vinext from "vinext";
 import { defineConfig } from "vite";
 import { nitro } from "nitro/vite";
+import { fileURLToPath } from "node:url";
 import hostingConfig from "./.openai/hosting.json" with { type: "json" };
 import { sites } from "./build/sites-vite-plugin.ts";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
+const vercelWorkersStub = fileURLToPath(new URL("./vercel/cloudflare-workers-stub.ts", import.meta.url));
 
 const { d1, r2 } = hostingConfig;
 
@@ -45,7 +47,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   if (process.env.VERCEL || process.env.NITRO_PRESET === "vercel") {
-    return { resolve: { alias: { "cloudflare:workers": "./vercel/cloudflare-workers-stub.ts" } }, plugins: [vinext(), nitro({ preset: "vercel" })] };
+    return { resolve: { alias: { "cloudflare:workers": vercelWorkersStub } }, plugins: [vinext(), nitro({ preset: "vercel" })] };
   }
 
   return {
